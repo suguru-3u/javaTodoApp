@@ -1,9 +1,13 @@
 package main;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import db.TaskDB;
 
 public class TaskMemo implements Memo{
 
@@ -44,10 +48,22 @@ public class TaskMemo implements Memo{
 
     // Task一覧の表示
     public void tasksShow(){
+    	tasks.clear();
+    	
+    	ResultSet tasksdb = TaskDB.getDBTasks();
+
+		try {
+			while (tasksdb.next()) {
+				Task task = new Task(tasksdb.getString("title"),tasksdb.getString("main"));
+				tasks.add(task);      			
+			}
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+    	
         if(tasks.isEmpty()){
-            System.out.println("");
-            System.out.println("現在抱えているTaskはありません");
-            System.out.println("");
+            System.out.println("\n現在抱えているTaskはありません\n");
         }else{
             System.out.println("");
             this.tasks.stream()
