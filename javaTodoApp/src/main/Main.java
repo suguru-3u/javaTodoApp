@@ -44,14 +44,6 @@ public class Main{
           user.memoContentEdit();
           break;
 
-        case 4 :
-          user.memoContentEdit();
-          break;
-
-        case 6 :
-          user.memoContentEdit();
-          break;
-
         case 5 :
           app = false;
           break;
