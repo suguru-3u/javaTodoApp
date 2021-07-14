@@ -54,7 +54,7 @@ public class TaskMemo implements Memo{
 
 		try {
 			while (tasksdb.next()) {
-				Task task = new Task(tasksdb.getString("title"),tasksdb.getString("main"));
+				Task task = new Task(tasksdb.getInt("id"),tasksdb.getString("title"),tasksdb.getString("main"),tasksdb.getInt("delete_flg"));
 				tasks.add(task);      			
 			}
 		} catch (SQLException e) {
@@ -67,7 +67,6 @@ public class TaskMemo implements Memo{
         }else{
             System.out.println("");
             this.tasks.stream()
-            .filter(i -> i.getFinishFlg() == false)
             .map(i -> "■ " + (tasks.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細    ：  " + i.getMain())
             .forEach(i -> System.out.println(i));
             System.out.println("");
@@ -108,7 +107,6 @@ public class TaskMemo implements Memo{
     public String toString(){
 
         String tasksString = this.tasks.stream()
-        .filter(i -> i.getFinishFlg() == false)
         .map(i -> "　タイトル：　" + i.getTitle() + "　詳細：　" + i.getMain())
         .collect(Collectors.joining(", "));
 

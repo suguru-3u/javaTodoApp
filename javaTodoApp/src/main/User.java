@@ -1,5 +1,7 @@
 package main;
 
+import db.TaskDB;
+
 public class User extends Human{
 
     // Taskクラスを収納
@@ -41,12 +43,8 @@ public class User extends Human{
         System.out.print("TaskのMainを入力してください ：　");
         String taskMain = KeyBord.inputKeyBordString();
 
-        Task task = new Task(taskTitle,taskMain);
+        TaskDB.createDBTasks(taskTitle,taskMain);
 
-        System.out.println(task);
-
-        this.taskMemo.setTasks(task);
-        
     }
 
     // ユーザーが登録したTaskを削除するメソッド
@@ -74,9 +72,9 @@ public class User extends Human{
             System.out.print("TaskのMainを入力してください ：　");
             String taskMainChange = KeyBord.inputKeyBordString();
 
-            Task taskChange = new Task(taskTitleChange,taskMainChange);
-
-            taskMemo.changeTask(taskSerchCheack,taskChange);
+//            Task taskChange = new Task(taskTitleChange,taskMainChange);
+//
+//            taskMemo.changeTask(taskSerchCheack,taskChange);
         }
     }
 }
