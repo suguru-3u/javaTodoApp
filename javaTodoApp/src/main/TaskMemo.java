@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import db.TaskDB;
+
 public class TaskMemo implements Memo{
 
     // Taskを格納するフィールド
@@ -44,15 +46,28 @@ public class TaskMemo implements Memo{
 
     // Task一覧の表示
     public void tasksShow(){
-        if(tasks.isEmpty()){
-            System.out.println("");
-            System.out.println("現在抱えているTaskはありません");
-            System.out.println("");
+    	
+    	
+    	List<Task> taskss = TaskDB.getDBTasks();
+
+//		try {
+//			if(tasksdb.next()) {
+//				while (tasksdb.next()) {
+//					Task task = new Task(tasksdb.getInt("id"),tasksdb.getString("title"),tasksdb.getString("main"),tasksdb.getInt("delete_flg"));
+//					tasks.add(task);      			
+//				}				
+//			}
+//		} catch (SQLException e) {
+//			// TODO 自動生成された catch ブロック
+//			e.printStackTrace();
+//		}
+    	
+        if(taskss.isEmpty()){
+            System.out.println("\n現在抱えているTaskはありません\n");
         }else{
             System.out.println("");
-            this.tasks.stream()
-            .filter(i -> i.getFinishFlg() == false)
-            .map(i -> "■ " + (tasks.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細    ：  " + i.getMain())
+            taskss.stream()
+            .map(i -> "■ " + (taskss.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細    ：  " + i.getMain())
             .forEach(i -> System.out.println(i));
             System.out.println("");
         }
@@ -92,7 +107,6 @@ public class TaskMemo implements Memo{
     public String toString(){
 
         String tasksString = this.tasks.stream()
-        .filter(i -> i.getFinishFlg() == false)
         .map(i -> "　タイトル：　" + i.getTitle() + "　詳細：　" + i.getMain())
         .collect(Collectors.joining(", "));
 

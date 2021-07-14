@@ -8,15 +8,18 @@ package main;
 public class Task{
 
     // フィールド
+	private int id;
     private String title;
     private String main;
-    private boolean finishFlg;
+    private int finishFlg;
+    
 
     // コンストラクト
-    public Task(String title,String main){
+    public Task(int id, String title,String main,int finishFlg){
+    	this.id = id;
         this.title = title;
         this.main = main;
-        this.finishFlg = false;
+        this.finishFlg = finishFlg;
     }
 
      // Titleフィールドの呼び出し
@@ -30,8 +33,8 @@ public class Task{
     }
 
     // FinishFlgフィールドへ代入
-    public void setFinishFlg(){
-        this.finishFlg = true;
+    public void setFinishFlg(int finishFlg){
+        this.finishFlg = finishFlg;
     }
 
     // Titleフィールドの呼び出し
@@ -45,13 +48,13 @@ public class Task{
     }
 
     // FinishFlgフィールドの呼び出し
-    public boolean getFinishFlg(){
+    public int getFinishFlg(){
         return this.finishFlg;
     }
 
     // クラスの内容表示メソッド
     public String toString(){
-        if(this.finishFlg){
+        if(this.finishFlg == 1){
             String finshTask = "このTaskは終了しています..  タイトル：　" + this.title + "詳細:　" + this.main;
             return finshTask;
         }else{
