@@ -1,7 +1,5 @@
 package main;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,26 +46,28 @@ public class TaskMemo implements Memo{
 
     // Task一覧の表示
     public void tasksShow(){
-    	tasks.clear();
     	
-    	ResultSet tasksdb = TaskDB.getDBTasks();
+    	
+    	List<Task> taskss = TaskDB.getDBTasks();
 
-		try {
-			while (tasksdb.next()) {
-				Task task = new Task(tasksdb.getInt("id"),tasksdb.getString("title"),tasksdb.getString("main"),tasksdb.getInt("delete_flg"));
-				tasks.add(task);      			
-			}
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+//		try {
+//			if(tasksdb.next()) {
+//				while (tasksdb.next()) {
+//					Task task = new Task(tasksdb.getInt("id"),tasksdb.getString("title"),tasksdb.getString("main"),tasksdb.getInt("delete_flg"));
+//					tasks.add(task);      			
+//				}				
+//			}
+//		} catch (SQLException e) {
+//			// TODO 自動生成された catch ブロック
+//			e.printStackTrace();
+//		}
     	
-        if(tasks.isEmpty()){
+        if(taskss.isEmpty()){
             System.out.println("\n現在抱えているTaskはありません\n");
         }else{
             System.out.println("");
-            this.tasks.stream()
-            .map(i -> "■ " + (tasks.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細    ：  " + i.getMain())
+            taskss.stream()
+            .map(i -> "■ " + (taskss.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細    ：  " + i.getMain())
             .forEach(i -> System.out.println(i));
             System.out.println("");
         }
