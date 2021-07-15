@@ -47,20 +47,7 @@ public class TaskMemo implements Memo{
     // Task一覧の表示
     public void tasksShow(){
     	
-    	
     	List<Task> taskss = TaskDB.getDBTasks();
-
-//		try {
-//			if(tasksdb.next()) {
-//				while (tasksdb.next()) {
-//					Task task = new Task(tasksdb.getInt("id"),tasksdb.getString("title"),tasksdb.getString("main"),tasksdb.getInt("delete_flg"));
-//					tasks.add(task);      			
-//				}				
-//			}
-//		} catch (SQLException e) {
-//			// TODO 自動生成された catch ブロック
-//			e.printStackTrace();
-//		}
     	
         if(taskss.isEmpty()){
             System.out.println("\n現在抱えているTaskはありません\n");
