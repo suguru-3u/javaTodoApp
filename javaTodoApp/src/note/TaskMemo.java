@@ -1,4 +1,4 @@
-package main;
+package note;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import db.TaskDB;
+import model.Task;
 
 public class TaskMemo implements Memo{
 
@@ -21,14 +22,14 @@ public class TaskMemo implements Memo{
         return this.tasks;
     }
 
+//    登録されているTask数の取得
     public int getTasksNumbers(){
         return tasks.size();
     }
 
     // 特定の要素を削除する 
     public void deleteTask(int taskNumber){
-        System.out.println("");
-        System.out.println("削除処理を実行します");
+        System.out.println("\n削除処理を実行します");
         try{
         	
         	Task task = this.tasks.get(taskNumber);
@@ -83,15 +84,18 @@ public class TaskMemo implements Memo{
 
 
     // 特定のTaskの検索メソッド
-    public int getTask(){
+    public int taskSerch(){
 
         int taskNumber;
         try {
             // キーボード入力を受け付ける
             Scanner title = new Scanner(System.in);
             taskNumber = title.nextInt();
+            
             taskNumber -= 1 ;
+            
             Task task = this.tasks.get(taskNumber);
+            
             System.out.println(task.toString());
             System.out.print("こちらのTaskでお間違い無いでしょうか？ 間違いなければ「y」を入力してください：　");
 
@@ -100,9 +104,9 @@ public class TaskMemo implements Memo{
 
             if(taskJugeAnwser.equals("y")){
                 return taskNumber;
-        }else{
-            return -1 ;
-        }
+            }else{
+            	return -1 ;
+            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

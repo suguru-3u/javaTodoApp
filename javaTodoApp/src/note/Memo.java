@@ -1,4 +1,4 @@
-package main;
+package note;
 
 /*
 * このアプリの表示機能を行う抽象クラス
