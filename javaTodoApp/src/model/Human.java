@@ -1,4 +1,4 @@
-package main;
+package model;
 
 /*
 * このクラスは利用者と管理者の機能の元を持っている人間クラス

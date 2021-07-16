@@ -1,4 +1,4 @@
-package main;
+package form;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -6,15 +6,14 @@ import java.util.Scanner;
 
 public class KeyBord{
 
-
     public static String inputKeyBordString(){
 
         try {
             // キーボード入力を受け付ける
-            Scanner title = new Scanner(System.in);
-            String taskTitle = title.nextLine();
+            Scanner keyString = new Scanner(System.in);
+            String taskString = keyString.nextLine();
 
-            return taskTitle;
+            return taskString;
 
         }catch (Exception e) {
 

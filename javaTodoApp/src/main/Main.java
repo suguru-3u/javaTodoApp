@@ -1,5 +1,9 @@
 package main;
 
+import form.KeyBord;
+import model.User;
+import note.TaskMemo;
+
 public class Main{
   public static void main(String[] args){
 
@@ -12,15 +16,7 @@ public class Main{
 
     // Taskメイン機能
     while(app){
-
-      System.out.println("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-      System.out.println("    User情報　　　");
-      System.out.println("    name   : " + user.getName() );
-      System.out.println("    email  : " + user.getEmail() );
-      System.out.println("\n    Task情報　　　");
-      System.out.println("    Task数 ： " + taskMemo.getTasksNumbers() + "個");
-      System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-
+    	
       taskMemo.tasksShow();
 
       System.out.print("Taskを入力する場合は「1」、Taskを削除する場合は「２」、Taskを編集する場合は「３」、終了する場合は「５」を入力してください　：");

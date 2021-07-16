@@ -1,6 +1,8 @@
-package main;
+package model;
 
 import db.TaskDB;
+import form.KeyBord;
+import note.TaskMemo;
 
 public class User extends Human{
 
@@ -51,7 +53,7 @@ public class User extends Human{
     public void memoContentDelete(){
 
         System.out.print("\n削除したいTaskの番号を入力してください：　");
-        int taskSerchCheack = this.taskMemo.getTask();
+        int taskSerchCheack = this.taskMemo.taskSerch();
 
         if(taskSerchCheack >= 0){
             this.taskMemo.deleteTask(taskSerchCheack);
@@ -62,7 +64,7 @@ public class User extends Human{
     public void memoContentEdit(){
         
         System.out.print("\n編集したいTaskの番号を入力してください：　");
-        int taskSerchCheack = this.taskMemo.getTask();
+        int taskSerchCheack = this.taskMemo.taskSerch();
 
         if(taskSerchCheack >= 0){
 
@@ -72,9 +74,7 @@ public class User extends Human{
             System.out.print("TaskのMainを入力してください ：　");
             String taskMainChange = KeyBord.inputKeyBordString();
 
-//            Task taskChange = new Task(taskTitleChange,taskMainChange);
-//
-//            taskMemo.changeTask(taskSerchCheack,taskChange);
+            taskMemo.updateTask(taskSerchCheack,taskTitleChange,taskMainChange);
         }
     }
 }
