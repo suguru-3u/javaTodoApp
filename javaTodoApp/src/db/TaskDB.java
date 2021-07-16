@@ -129,7 +129,7 @@ public class TaskDB {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            System.out.println("DB変更の処理が完了しました");       
+            System.out.println("DB処理が完了しました");       
         }
 	    return tasks;
     }
