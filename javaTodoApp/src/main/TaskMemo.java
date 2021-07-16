@@ -30,6 +30,11 @@ public class TaskMemo implements Memo{
         System.out.println("");
         System.out.println("削除処理を実行します");
         try{
+        	
+        	Task task = this.tasks.get(taskNumber);
+        	int taskIdNumber = task.getId();
+        	TaskDB.deleteDBTasks(taskIdNumber);
+        	
             this.tasks.remove(taskNumber);
             System.out.println("削除に成功しました");
         }catch(IndexOutOfBoundsException e){
@@ -47,14 +52,16 @@ public class TaskMemo implements Memo{
     // Task一覧の表示
     public void tasksShow(){
     	
-    	List<Task> taskss = TaskDB.getDBTasks();
+    	tasks.clear();
     	
-        if(taskss.isEmpty()){
+    	List<Task> tasks = TaskDB.getDBTasks(this.tasks);
+    	
+        if(tasks.isEmpty()){
             System.out.println("\n現在抱えているTaskはありません\n");
         }else{
             System.out.println("");
-            taskss.stream()
-            .map(i -> "■ " + (taskss.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細    ：  " + i.getMain())
+            tasks.stream()
+            .map(i -> "■ " + (tasks.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細    ：  " + i.getMain())
             .forEach(i -> System.out.println(i));
             System.out.println("");
         }

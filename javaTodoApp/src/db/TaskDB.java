@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import main.Task;
@@ -38,9 +37,32 @@ public class TaskDB {
         }
 	}
 
-    public static List<Task> getDBTasks() {
-//    	
-    	List<Task> tasks = new ArrayList<Task>();
+	public static void deleteDBTasks(int id) {
+		
+	    String SQL = "delete from tasks where id = (?)";
+	        
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+
+            conn.setAutoCommit(false);
+            
+            try(PreparedStatement ps = conn.prepareStatement(SQL)){
+                ps.setInt(1,id);
+                   
+                ps.executeUpdate();
+                conn.commit();
+            } catch (Exception e) {
+                conn.rollback();
+                System.out.println("rollback");
+                throw e;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            System.out.println("処理が完了しました");
+        }
+	}
+
+    public static List<Task> getDBTasks(List<Task> tasks) {
     	
     	Connection con = null;
     	PreparedStatement stmt = null;

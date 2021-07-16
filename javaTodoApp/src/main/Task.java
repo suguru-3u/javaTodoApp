@@ -36,6 +36,11 @@ public class Task{
     public void setFinishFlg(int finishFlg){
         this.finishFlg = finishFlg;
     }
+    
+ // idフィールドの呼び出し
+    public int getId(){
+        return this.id;
+    }
 
     // Titleフィールドの呼び出し
     public String getTitle(){
