@@ -43,9 +43,23 @@ public class TaskMemo implements Memo{
     } 
 
     // Taskを変換するメソッド
-    public void changeTask(int taskNumber ,Task task){
+    public void changeTask(int taskNumber ,String title,String main){
         System.out.print("Taskの内容の変更を開始します");
-        this.tasks.set(taskNumber,task);
+        
+        if(title.isEmpty()) {
+        	Task task = this.tasks.get(taskNumber);
+        	title = task.getTitle();        	
+        }
+        
+        if(main.isEmpty()) {
+        	Task task = this.tasks.get(taskNumber);
+        	main = task.getTitle();        	
+        }
+        
+        Task task = this.tasks.get(taskNumber);
+    	int taskDBNumber = task.getId();        	
+           
+        TaskDB.editDBTasks(taskDBNumber,title,main);
         System.out.print("Taskの内容の変更が終了しました");
     }
 

@@ -61,6 +61,34 @@ public class TaskDB {
             System.out.println("処理が完了しました");
         }
 	}
+	
+	public static void editDBTasks(int id ,String title,String main) {
+		
+	    String SQL = "update tasks set title = (?),main = (?) where id = (?)";
+	        
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+
+            conn.setAutoCommit(false);
+            
+            try(PreparedStatement ps = conn.prepareStatement(SQL)){
+            	ps.setString(1,title);
+            	ps.setString(2,main);
+                ps.setInt(3,id);
+                   
+                ps.executeUpdate();
+                conn.commit();
+                
+            } catch (Exception e) {
+                conn.rollback();
+                System.out.println("rollback");
+                throw e;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            System.out.println("DB変更の処理が完了しました");
+        }
+	}
 
     public static List<Task> getDBTasks(List<Task> tasks) {
     	
@@ -68,7 +96,6 @@ public class TaskDB {
     	PreparedStatement stmt = null;
     	ResultSet rs = null;
     	
-// SQL文の作成
 	    String sql = "SELECT * FROM tasks where delete_flg = 0";
 	
 	    try {
@@ -80,11 +107,6 @@ public class TaskDB {
 	        stmt = con.prepareStatement(sql);
 	        // 実行結果取得
 	        rs = stmt.executeQuery();
-	
-	  // データがなくなるまで(rs.next()がfalseになるまで)繰り返す
-//	        while (rs.next()) {
-//	            tasks.add(rs);      
-//	        }
 	        
 	        try {
 				if(rs.next()) {

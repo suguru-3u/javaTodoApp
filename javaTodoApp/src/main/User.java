@@ -72,9 +72,7 @@ public class User extends Human{
             System.out.print("TaskのMainを入力してください ：　");
             String taskMainChange = KeyBord.inputKeyBordString();
 
-//            Task taskChange = new Task(taskTitleChange,taskMainChange);
-//
-//            taskMemo.changeTask(taskSerchCheack,taskChange);
+            taskMemo.changeTask(taskSerchCheack,taskTitleChange,taskMainChange);
         }
     }
 }
