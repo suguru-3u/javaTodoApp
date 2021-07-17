@@ -10,7 +10,7 @@ public class User extends Human{
     private TaskMemo taskMemo;
 
     // コンストラクタ
-    public User(TaskMemo taskMemo){
+    public User(){
         System.out.print("\nお名前を入力してください  :");
         String name = KeyBord.inputKeyBordString();
 
@@ -25,7 +25,6 @@ public class User extends Human{
         super.setPassword(password);
         super.setAdminflg(false);
         super.setDeleteflg(false);
-        this.taskMemo = taskMemo;
 
         System.out.println("\nようこそ、JavaTodoAooへ" + this.getName() + "さん");
     } 

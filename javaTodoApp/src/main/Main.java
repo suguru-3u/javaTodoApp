@@ -6,13 +6,41 @@ import note.TaskMemo;
 
 public class Main{
   public static void main(String[] args){
-
-    // インスタンス変数生成
+	
+  // インスタンス変数生成
     TaskMemo taskMemo = new TaskMemo();
+    User user = null;
+    
     boolean app = true;
-
-    // ユーザー情報入力
-    User user = new User(taskMemo);
+	boolean appp = true;
+	System.out.println("ようこそJavaTodoAppへ");
+	
+    //ログイン、会員登録
+	while(appp){
+		System.out.println("ログインは「1」、会員登録は「2」を入力してください");
+		int a = KeyBord.inputKeyBordInt();
+		
+		switch(a){
+	
+	    // Task登録処理
+	    case 1 :
+	//      user.memoContentCreate();
+	    	appp = false;
+	      break;
+	
+	    case 2 :
+	    // Task削除処理
+	    	appp = false;
+	    	// ユーザー情報入力
+	        user = new User();
+	      break;
+	      
+	    default:
+	      System.out.print("正しく入力してください");
+	      break;
+		}
+	}
+    
 
     // Taskメイン機能
     while(app){
