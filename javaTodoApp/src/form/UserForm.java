@@ -27,7 +27,9 @@ public class UserForm {
         
         boolean emptyCheak = this.emptyCheak(name,email,password);
         
-        if(inputCount && emptyCheak) {
+        boolean emailStringCheak = this.emailCheak(email);
+        
+        if(inputCount && emptyCheak && emailStringCheak) {
         	String passwordHash = null;
 			try {
 				passwordHash = this.cryptoHash(password);
@@ -89,6 +91,16 @@ public class UserForm {
 			return false;
 		}
 		return true;
+	}
+	
+	public boolean emailCheak(String email) {
+		
+		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
+		
+		if(email.matches(mailFormat)){
+			return true;		
+		}
+		return false;
 	}
 	
 	public String cryptoHash(String password) throws NoSuchAlgorithmException {

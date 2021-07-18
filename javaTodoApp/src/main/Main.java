@@ -44,7 +44,7 @@ public class Main{
 	      break;
 	      
 	    default:
-	      System.out.print("正しく入力してください");
+	      System.out.println("正しく入力してください");
 	      break;
 		}
 	}
