@@ -10,16 +10,7 @@ public class User extends Human{
     private TaskMemo taskMemo;
 
     // コンストラクタ
-    public User(){
-        System.out.print("\nお名前を入力してください  :");
-        String name = KeyBord.inputKeyBordString();
-
-        System.out.print("emailを入力してください   :");
-        String email = KeyBord.inputKeyBordString();
-
-        System.out.print("Passwordを入力してください:");
-        String password = KeyBord.inputKeyBordString();
-        
+    public User(String name,String email,byte[] password){
         super.setName(name);
         super.setEmail(email);
         super.setPassword(password);

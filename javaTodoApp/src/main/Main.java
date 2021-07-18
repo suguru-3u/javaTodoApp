@@ -1,6 +1,7 @@
 package main;
 
 import form.KeyBord;
+import form.UserForm;
 import model.User;
 import note.TaskMemo;
 
@@ -28,11 +29,14 @@ public class Main{
 	    	appp = false;
 	      break;
 	
+//	    会員登録処理
 	    case 2 :
-	    // Task削除処理
-	    	appp = false;
-	    	// ユーザー情報入力
-	        user = new User();
+	    	UserForm userform = new UserForm();
+	    	if(userform.getCheakCreate()) {
+	    		user = new User(userform.getName(),userform.getEmail(),userform.getPassword());
+	    		appp = false;	    		
+	    	}
+	    	System.out.print("正しく入力してください");
 	      break;
 	      
 	    default:
