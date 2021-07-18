@@ -3,16 +3,46 @@ package main;
 import form.KeyBord;
 import model.User;
 import note.TaskMemo;
+import note.UserMemo;
 
 public class Main{
-  public static void main(String[] args){
-
-    // インスタンス変数生成
+	
+	public static boolean appp = true;
+	
+	public static void main(String[] args){
+	
+  // インスタンス変数生成
     TaskMemo taskMemo = new TaskMemo();
+    User user = null;
+    
     boolean app = true;
-
-    // ユーザー情報入力
-    User user = new User(taskMemo);
+    
+	System.out.println("ようこそJavaTodoAppへ");
+	
+    //ログイン、会員登録
+	while(appp){
+		System.out.println("ログインは「1」、会員登録は「2」を入力してください");
+		int a = KeyBord.inputKeyBordInt();
+		
+		switch(a){
+	
+	    // Task登録処理
+	    case 1 :
+	//      user.memoContentCreate();
+	    	appp = false;
+	      break;
+	
+//	    会員登録処理
+	    case 2 :
+    		UserMemo.userCreate(user);
+	      break;
+	      
+	    default:
+	      System.out.println("正しく入力してください");
+	      break;
+		}
+	}
+    
 
     // Taskメイン機能
     while(app){

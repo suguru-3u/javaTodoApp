@@ -18,11 +18,12 @@ public class TaskMemo implements Memo{
         this.tasks.add(task);
     }
 
+//    Task一覧を取得
     public List<Task> getTasks(){
         return this.tasks;
     }
 
-//    登録されているTask数の取得
+    // 登録されているTask数の取得
     public int getTasksNumbers(){
         return tasks.size();
     }
@@ -79,6 +80,7 @@ public class TaskMemo implements Memo{
         	
             this.tasks.remove(taskNumber);
             System.out.println("削除に成功しました");
+            
         }catch(IndexOutOfBoundsException e){
             System.out.println("削除に失敗しました");
         }
