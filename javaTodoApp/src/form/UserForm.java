@@ -29,7 +29,9 @@ public class UserForm {
         
         boolean emailStringCheak = this.emailCheak(email);
         
-        if(inputCount && emptyCheak && emailStringCheak) {
+        boolean passwordStringCheak = this.passWordCheak(password);
+        
+        if(inputCount && emptyCheak && emailStringCheak && passwordStringCheak) {
         	String passwordHash = null;
 			try {
 				passwordHash = this.cryptoHash(password);
@@ -98,6 +100,15 @@ public class UserForm {
 		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
 		
 		if(email.matches(mailFormat)){
+			return true;		
+		}
+		return false;
+	}
+	
+	public boolean passWordCheak(String password) {
+		
+		String mailFormat = "^[a-zA-Z0-9!#$%&^@]{6,12}$";
+		if(password.matches(mailFormat)){
 			return true;		
 		}
 		return false;
