@@ -12,9 +12,11 @@ import model.Task;
 public class UserDB {
 	
 	//	ユーザー情報の登録
-	public static void createDBUser(String name,String email,String password) {
+	public static boolean createDBUser(String name,String email,String password) {
 		
-	    String SQL = "insert into tasks(name,email,password) VALUES(?,?,?)";
+		boolean cheack = true;
+		
+	    String SQL = "insert into users(name,email,password) VALUES(?,?,?)";
 	        
         try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -31,13 +33,16 @@ public class UserDB {
             } catch (Exception e) {
                 conn.rollback();
                 System.out.println("rollback");
-                throw e;
+                throw e;    
             }
         } catch (Exception e) {
             e.printStackTrace();
+            cheack = false;
         }finally {
             System.out.println("処理が完了しました");
         }
+        return cheack;
+        
 	}
 
 	//	ユーザー情報の削除

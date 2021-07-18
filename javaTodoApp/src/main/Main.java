@@ -4,6 +4,7 @@ import form.KeyBord;
 import form.UserForm;
 import model.User;
 import note.TaskMemo;
+import note.UserMemo;
 
 public class Main{
   public static void main(String[] args){
@@ -34,7 +35,10 @@ public class Main{
 	    	UserForm userform = new UserForm();
 	    	if(userform.getCheakCreate()) {
 	    		user = new User(userform.getName(),userform.getEmail(),userform.getPassword());
-	    		appp = false;	    		
+	    		boolean createDBCheak =  UserMemo.userCreate(user);
+	    		if(createDBCheak) {
+	    			appp = false;	    			    			
+	    		}
 	    	}
 	    	System.out.print("正しく入力してください");
 	      break;
