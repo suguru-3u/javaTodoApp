@@ -8,7 +8,7 @@ abstract class Human{
 
     private String name;
     private String email;
-    private byte[] password;
+    private String password;
     private boolean adminflg;
     private boolean deleteflg;
 
@@ -40,12 +40,12 @@ abstract class Human{
         return this.email;
     }
 
-     public void setPassword(byte[] password){
+     public void setPassword(String password){
         this.password = password;
     }
 
     // 名前をインスタンス変数から取得
-    public byte[] getPassword(){
+    public String getPassword(){
         return this.password;
     }
 

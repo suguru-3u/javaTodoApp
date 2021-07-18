@@ -9,7 +9,7 @@ public class UserForm {
 	
 	private String name;
 	private String email;
-	private byte[] password;
+	private String password;
 	private boolean cheakCreate;
 	
 	public UserForm(){
@@ -28,7 +28,7 @@ public class UserForm {
         boolean emptyCheak = this.emptyCheak(name,email,password);
         
         if(inputCount && emptyCheak) {
-        	byte[] passwordHash = null;
+        	String passwordHash = null;
 			try {
 				passwordHash = this.cryptoHash(password);
 			} catch (NoSuchAlgorithmException e) {
@@ -61,11 +61,11 @@ public class UserForm {
 		return this.email;
 	}
 	
-	public void setPassword(byte[] password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	
-	public byte[] getPassword() {
+	public String getPassword() {
 		return this.password;
 	}
 	
@@ -78,7 +78,7 @@ public class UserForm {
 	}
 	
 	public boolean inputCount(String inputName){
-		if(inputName.length() < 20) {
+		if(inputName.length() > 20) {
 			return false;
 		}
 		return true;
@@ -91,11 +91,16 @@ public class UserForm {
 		return true;
 	}
 	
-	public byte[] cryptoHash(String password) throws NoSuchAlgorithmException {
+	public String cryptoHash(String password) throws NoSuchAlgorithmException {
+		
+		// Hash化
         MessageDigest digest = MessageDigest.getInstance(AccessKey.getHash());
         byte[] passwordHash = digest.digest(password.getBytes());
-        System.out.println(passwordHash); 
-        return passwordHash;
+   
+        // 文字列に変換
+        String passwordHashString = new String(passwordHash);
+        
+        return passwordHashString;
     }
 
 }
