@@ -1,20 +1,22 @@
 package main;
 
 import form.KeyBord;
-import form.UserForm;
 import model.User;
 import note.TaskMemo;
 import note.UserMemo;
 
 public class Main{
-  public static void main(String[] args){
+	
+	public static boolean appp = true;
+	
+	public static void main(String[] args){
 	
   // インスタンス変数生成
     TaskMemo taskMemo = new TaskMemo();
     User user = null;
     
     boolean app = true;
-	boolean appp = true;
+    
 	System.out.println("ようこそJavaTodoAppへ");
 	
     //ログイン、会員登録
@@ -32,15 +34,7 @@ public class Main{
 	
 //	    会員登録処理
 	    case 2 :
-	    	UserForm userform = new UserForm();
-	    	if(userform.getCheakCreate()) {
-	    		user = new User(userform.getName(),userform.getEmail(),userform.getPassword());
-	    		boolean createDBCheak =  UserMemo.userCreate(user);
-	    		if(createDBCheak) {
-	    			appp = false;	    			    			
-	    		}
-	    	}
-	    	System.out.print("正しく入力してください");
+    		UserMemo.userCreate(user);
 	      break;
 	      
 	    default:

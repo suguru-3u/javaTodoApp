@@ -7,14 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import main.Main;
 import model.Task;
 
 public class UserDB {
 	
 	//	ユーザー情報の登録
-	public static boolean createDBUser(String name,String email,String password) {
-		
-		boolean cheack = true;
+	public static void createDBUser(String name,String email,String password) {
 		
 	    String SQL = "insert into users(name,email,password) VALUES(?,?,?)";
 	        
@@ -30,6 +29,8 @@ public class UserDB {
                 ps.executeUpdate();
                 conn.commit();
                 
+                Main.appp = false;
+                
             } catch (Exception e) {
                 conn.rollback();
                 System.out.println("rollback");
@@ -37,12 +38,9 @@ public class UserDB {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            cheack = false;
         }finally {
             System.out.println("処理が完了しました");
         }
-        return cheack;
-        
 	}
 
 	//	ユーザー情報の削除

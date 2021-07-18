@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.UserDB;
+import form.UserForm;
 import model.User;
+
 
 public class UserMemo {
 	
@@ -12,14 +14,21 @@ public class UserMemo {
     private List<User>  users = new ArrayList<User>();
 	
 	// ユーザー情報をDBに保存する
-	public static boolean userCreate(User user) {
+	public static void userCreate(User user) {
 		
-		String name = user.getName();
-		String email = user.getEmail();
-		String password = user.getPassword();
+		UserForm userform = new UserForm();
 		
-		boolean cheak = UserDB.createDBUser(name, email, password);
-		return cheak;
+    	if(userform.getCheakCreate()) {
+    		user = new User(userform.getName(),userform.getEmail(),userform.getPassword());
+
+    		String name = user.getName();
+    		String email = user.getEmail();
+    		String password = user.getPassword();
+    		
+    		UserDB.createDBUser(name, email, password);
+    	}else {
+    		System.out.println("正しく入力してください"); 
+    	}
 	}
 	
 }
