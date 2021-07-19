@@ -9,6 +9,7 @@ import java.util.List;
 
 import main.Main;
 import model.Task;
+import model.User;
 
 public class UserDB {
 	
@@ -41,6 +42,47 @@ public class UserDB {
         }finally {
             System.out.println("処理が完了しました");
         }
+	}
+	
+	//	ユーザーログイン
+	public static void userLogin(String email,String password) {
+		
+		ResultSet rs = null;
+		
+		 String SQL = "SELECT * FROM users WHERE email = (?) and password = (?)";
+	        
+	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+
+	            conn.setAutoCommit(false);
+	            
+	            try(PreparedStatement ps = conn.prepareStatement(SQL)){            
+	                ps.setString(1,email);
+	                ps.setString(2,password);
+	                
+	                rs = ps.executeQuery();    
+	                
+	                conn.commit();
+	                
+	                if(rs.next()) {
+    					while (rs.next()) {
+    						User user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+    											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
+    						
+    					}				
+    				}
+	                
+//	                Main.appp = false;
+	                
+	            } catch (Exception e) {
+	                conn.rollback();
+	                System.out.println("rollback");
+	                throw e;    
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }finally {
+	            System.out.println("処理が完了しました");
+	        }
 	}
 
 	//	ユーザー情報の削除

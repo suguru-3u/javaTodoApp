@@ -10,13 +10,13 @@ public class User extends Human{
     private TaskMemo taskMemo;
 
     // コンストラクタ
-    public User(String name,String email,String password){
+    public User(String name,String email,String password,boolean adminFlg,boolean deleteFlg){
     	
         super.setName(name);
         super.setEmail(email);
         super.setPassword(password);
-        super.setAdminflg(false);
-        super.setDeleteflg(false);
+        super.setAdminflg(adminFlg);
+        super.setDeleteflg(deleteFlg);
 
         System.out.println("\nようこそ、JavaTodoAooへ" + this.getName() + "さん");
     } 
