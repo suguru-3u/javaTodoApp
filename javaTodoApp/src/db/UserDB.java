@@ -16,19 +16,45 @@ public class UserDB {
 	//	ユーザー情報の登録
 	public static void createDBUser(String name,String email,String password) {
 		
-	    String SQL = "insert into users(name,email,password) VALUES(?,?,?)";
+		ResultSet rs = null;
+		
+	    String createSQL = "insert into users(name,email,password) VALUES(?,?,?)";
+	    
+	    String SQL = "SELECT * FROM users WHERE email = (?) and password = (?)";
 	        
         try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
             conn.setAutoCommit(false);
             
-            try(PreparedStatement ps = conn.prepareStatement(SQL)){
+            try {
+                PreparedStatement ps = conn.prepareStatement(createSQL);
                 ps.setString(1,name);
                 ps.setString(2,email);
                 ps.setString(3,password);
                 
                 ps.executeUpdate();
+               
                 conn.commit();
+                
+                PreparedStatement ps2 = conn.prepareStatement(SQL);
+                ps2.setString(1,email);
+                ps2.setString(2,password);
+                
+                rs = ps2.executeQuery();    
+                
+                conn.commit();
+                
+                if(rs.next()) {
+					while (rs.next()) {
+						Main.user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
+						
+					}
+					Main.appp = false;
+				}
+                
+//                Main.user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+//						 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
                 
                 Main.appp = false;
                 
@@ -68,10 +94,11 @@ public class UserDB {
     						User user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
     											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
     						
-    					}				
+    					}
+    					Main.appp = false;
+    				}else {
+    					System.out.println("対象ユーザーが見つかりませんでした");    					
     				}
-	                
-//	                Main.appp = false;
 	                
 	            } catch (Exception e) {
 	                conn.rollback();
@@ -81,7 +108,7 @@ public class UserDB {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }finally {
-	            System.out.println("処理が完了しました");
+	            System.out.println("DB処理が完了しました");
 	        }
 	}
 

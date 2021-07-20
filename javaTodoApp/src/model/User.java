@@ -10,8 +10,8 @@ public class User extends Human{
     private TaskMemo taskMemo;
 
     // コンストラクタ
-    public User(String name,String email,String password,boolean adminFlg,boolean deleteFlg){
-    	
+    public User(int id ,String name,String email,String password,int adminFlg,int deleteFlg){
+    	super.setId(id);
         super.setName(name);
         super.setEmail(email);
         super.setPassword(password);

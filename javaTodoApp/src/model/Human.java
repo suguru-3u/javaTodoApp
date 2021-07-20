@@ -6,11 +6,12 @@ package model;
 
 abstract class Human{
 
+	private int id;
     private String name;
     private String email;
     private String password;
-    private boolean adminflg;
-    private boolean deleteflg;
+    private int adminflg;
+    private int deleteflg;
 
     // TaskMemoクラスにTaskインスタンスを生成
     abstract public void memoContentCreate();
@@ -21,6 +22,15 @@ abstract class Human{
     // TaskMemoクラスのTaskインスタンスの内容変更
     abstract public void memoContentEdit();
 
+
+    public void setId(int id){
+        this.id = id;
+    }
+    
+    public int getId(){
+    	return this.id;
+    }
+    
     // 名前をインスタンス変数に格納
     public void setName(String name){
         this.name = name;
@@ -49,21 +59,21 @@ abstract class Human{
         return this.password;
     }
 
-     public void setAdminflg(boolean adminflg){
+     public void setAdminflg(int adminflg){
         this.adminflg = adminflg;
     }
 
     // 名前をインスタンス変数から取得
-    public boolean getAdminflg(){
+    public int getAdminflg(){
         return this.adminflg;
     }
 
-     public void setDeleteflg(boolean deleteflg){
+     public void setDeleteflg(int deleteflg){
         this.deleteflg = deleteflg;
     }
 
     // 名前をインスタンス変数から取得
-    public boolean getDeleteflg(){
+    public int getDeleteflg(){
         return this.deleteflg;
     }
 

@@ -1,8 +1,11 @@
 package note;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import db.AccessKey;
 import db.UserDB;
 import form.KeyBord;
 import form.UserForm;
@@ -26,13 +29,26 @@ public class UserMemo {
         if(userEmail.isEmpty() && userPassword.isEmpty()) {
         	 System.out.println("文字を正しく入力してください");
         }else {
-        	UserDB.userLogin(userEmail, userPassword);        	
+        	// Hash化
+            MessageDigest digest = null;
+			try {
+				digest = MessageDigest.getInstance(AccessKey.getHash());
+			} catch (NoSuchAlgorithmException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+            byte[] passwordHash = digest.digest(userPassword.getBytes());
+       
+            // 文字列に変換
+            String passwordHashString = new String(passwordHash);
+        	UserDB.userLogin(userEmail, passwordHashString);   
+        	
         }
         
     }
     
 	// ユーザー情報をDBに保存する
-	public static void userCreate(User user) {
+	public static void userCreate() {
 		
 		UserForm userform = new UserForm();
 		
@@ -40,11 +56,10 @@ public class UserMemo {
 		boolean deleteFlg = false;
 		
     	if(userform.getCheakCreate()) {
-    		user = new User(userform.getName(),userform.getEmail(),userform.getPassword(),adminFlg,deleteFlg);
 
-    		String name = user.getName();
-    		String email = user.getEmail();
-    		String password = user.getPassword();
+    		String name = userform.getName();
+    		String email = userform.getEmail();
+    		String password = userform.getPassword();
     		
     		UserDB.createDBUser(name, email, password);
     	}else {
