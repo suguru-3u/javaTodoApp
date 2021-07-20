@@ -8,12 +8,13 @@ import note.UserMemo;
 public class Main{
 	
 	public static boolean appp = true;
+	public static User user = null;
 	
 	public static void main(String[] args){
 	
   // インスタンス変数生成
     TaskMemo taskMemo = new TaskMemo();
-    User user = null;
+    
     
     boolean app = true;
     
@@ -28,13 +29,12 @@ public class Main{
 	
 	    // Task登録処理
 	    case 1 :
-	//      user.memoContentCreate();
-	    	appp = false;
+	    	UserMemo.userLogin();
 	      break;
 	
 //	    会員登録処理
 	    case 2 :
-    		UserMemo.userCreate(user);
+    		UserMemo.userCreate();
 	      break;
 	      
 	    default:
