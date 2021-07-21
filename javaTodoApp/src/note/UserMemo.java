@@ -62,6 +62,7 @@ public class UserMemo {
     		String password = userform.getPassword();
     		
     		UserDB.createDBUser(name, email, password);
+    		UserDB.userLogin(email, password);   
     	}else {
     		System.out.println("正しく入力してください"); 
     	}

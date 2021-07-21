@@ -8,13 +8,14 @@ import note.UserMemo;
 public class Main{
 	
 	public static boolean appp = true;
+	public static boolean appStatus = true;
 	public static User user = null;
+	
 	
 	public static void main(String[] args){
 	
   // インスタンス変数生成
     TaskMemo taskMemo = new TaskMemo();
-    
     
     boolean app = true;
     
@@ -22,28 +23,31 @@ public class Main{
 	
     //ログイン、会員登録
 	while(appp){
-		System.out.println("ログインは「1」、会員登録は「2」を入力してください");
+		System.out.println("ログインは「1」、会員登録は「2」、アプリを終了する場合は「3」を入力してください");
 		int a = KeyBord.inputKeyBordInt();
 		
 		switch(a){
 	
-	    // Task登録処理
 	    case 1 :
 	    	UserMemo.userLogin();
-	      break;
+	    	break;
 	
-//	    会員登録処理
 	    case 2 :
     		UserMemo.userCreate();
-	      break;
+    		break;
+	      
+	    case 3 :
+	    	System.exit(0);
+	    	break;
 	      
 	    default:
-	      System.out.println("正しく入力してください");
-	      break;
+	    	System.out.println("正しく入力してください");
+	    	break;
 		}
 	}
     
-
+	System.out.println(Main.user);
+	
     // Taskメイン機能
     while(app){
     	
@@ -57,22 +61,22 @@ public class Main{
 
         // Task登録処理
         case 1 :
-          user.memoContentCreate();
-          break;
+        	taskMemo.memoContentCreate();
+        	break;
 
         // Task削除処理
         case 2 :
-          user.memoContentDelete();
-          break;
+        	taskMemo.memoContentDelete();
+	        break;
 
         // Task内容変更処理
         case 3 :
-          user.memoContentEdit();
-          break;
+        	taskMemo.memoContentEdit();
+	        break;
 
         case 5 :
-          app = false;
-          break;
+        	System.exit(0);
+        	break;
 
         default:
           System.out.print("正しく入力してください");

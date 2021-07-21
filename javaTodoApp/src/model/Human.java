@@ -13,14 +13,14 @@ abstract class Human{
     private int adminflg;
     private int deleteflg;
 
-    // TaskMemoクラスにTaskインスタンスを生成
-    abstract public void memoContentCreate();
-
-    // TaskMemoクラスのTaskインスタンスを削除
-    abstract public void memoContentDelete();
-
-    // TaskMemoクラスのTaskインスタンスの内容変更
-    abstract public void memoContentEdit();
+//    // TaskMemoクラスにTaskインスタンスを生成
+//    abstract public void memoContentCreate();
+//
+//    // TaskMemoクラスのTaskインスタンスを削除
+//    abstract public void memoContentDelete();
+//
+//    // TaskMemoクラスのTaskインスタンスの内容変更
+//    abstract public void memoContentEdit();
 
 
     public void setId(int id){

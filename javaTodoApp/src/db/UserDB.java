@@ -36,27 +36,30 @@ public class UserDB {
                
                 conn.commit();
                 
-                PreparedStatement ps2 = conn.prepareStatement(SQL);
-                ps2.setString(1,email);
-                ps2.setString(2,password);
+//                UserDB.userLogin(email,password);
                 
-                rs = ps2.executeQuery();    
-                
-                conn.commit();
-                
-                if(rs.next()) {
-					while (rs.next()) {
-						Main.user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
-											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
-						
-					}
-					Main.appp = false;
-				}
-                
-//                Main.user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
-//						 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
-                
-                Main.appp = false;
+//                PreparedStatement ps2 = conn.prepareStatement(SQL);
+//                ps2.setString(1,email);
+//                ps2.setString(2,password);
+//                
+//                rs = ps2.executeQuery();    
+//                
+//                conn.commit();
+//                
+//                if(rs.next()) {
+//					while (rs.next()) {
+//						User userDB = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+//											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
+//						
+//						Main.user = userDB;
+//					}
+//					Main.appp = false;
+//				}
+//                
+////                Main.user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+////						 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
+//                
+////                Main.appp = false;
                 
             } catch (Exception e) {
                 conn.rollback();
@@ -89,16 +92,16 @@ public class UserDB {
 	                
 	                conn.commit();
 	                
-	                if(rs.next()) {
+//	                if(rs.next()) {
     					while (rs.next()) {
-    						User user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+    						User userDB  = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
     											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
-    						
+    						Main.user = userDB;
+    						Main.appp = false;
     					}
-    					Main.appp = false;
-    				}else {
-    					System.out.println("対象ユーザーが見つかりませんでした");    					
-    				}
+//    				}else {
+//    					S	ystem.out.println("対象ユーザーが見つかりませんでした");    					
+//    				}
 	                
 	            } catch (Exception e) {
 	                conn.rollback();
