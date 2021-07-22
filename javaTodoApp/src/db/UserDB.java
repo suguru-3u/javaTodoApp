@@ -36,31 +36,6 @@ public class UserDB {
                
                 conn.commit();
                 
-//                UserDB.userLogin(email,password);
-                
-//                PreparedStatement ps2 = conn.prepareStatement(SQL);
-//                ps2.setString(1,email);
-//                ps2.setString(2,password);
-//                
-//                rs = ps2.executeQuery();    
-//                
-//                conn.commit();
-//                
-//                if(rs.next()) {
-//					while (rs.next()) {
-//						User userDB = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
-//											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
-//						
-//						Main.user = userDB;
-//					}
-//					Main.appp = false;
-//				}
-//                
-////                Main.user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
-////						 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
-//                
-////                Main.appp = false;
-                
             } catch (Exception e) {
                 conn.rollback();
                 System.out.println("rollback");
@@ -94,9 +69,9 @@ public class UserDB {
 	                
 //	                if(rs.next()) {
     					while (rs.next()) {
-    						User userDB  = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+    						Main.user  = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
     											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
-    						Main.user = userDB;
+    						
     						Main.appp = false;
     					}
 //    				}else {

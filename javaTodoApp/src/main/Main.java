@@ -9,8 +9,8 @@ public class Main{
 	
 	public static boolean appp = true;
 	public static boolean appStatus = true;
-	public static User user = null;
 	
+	public static User user = null;
 	
 	public static void main(String[] args){
 	
@@ -45,8 +45,6 @@ public class Main{
 	    	break;
 		}
 	}
-    
-	System.out.println(Main.user);
 	
     // Taskメイン機能
     while(app){
