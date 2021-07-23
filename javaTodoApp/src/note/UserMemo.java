@@ -9,6 +9,7 @@ import db.AccessKey;
 import db.UserDB;
 import form.KeyBord;
 import form.UserForm;
+import main.Main;
 import model.User;
 
 
@@ -44,7 +45,6 @@ public class UserMemo {
         	UserDB.userLogin(userEmail, passwordHashString);   
         	
         }
-        
     }
     
 	// ユーザー情報をDBに保存する
@@ -66,4 +66,63 @@ public class UserMemo {
     		System.out.println("正しく入力してください"); 
     	}
 	}
+	
+	 // User情報を更新するメソッド
+    public static void memoContentEdit(){
+    	
+    	System.out.print("\nUser情報を表示します");   	
+    	System.out.print(Main.user);
+    	
+    	System.out.print("\n情報を変更する場合は「y」を入力してください");   	  	
+    	String taskJugeAnwser = KeyBord.inputKeyBordString();
+    	
+        if(taskJugeAnwser.equals("y")){	       	
+    		
+        	System.out.print("\nお名前を入力してください  :");
+            String name = KeyBord.inputKeyBordString();
+
+            System.out.print("emailを入力してください   :");
+            String email = KeyBord.inputKeyBordString();
+
+            System.out.print("Passwordを入力してください:");
+            String password = KeyBord.inputKeyBordString();
+            
+            UserForm userform = new UserForm(name,email,password);
+    		
+        	if(userform.getCheakCreate()) {
+
+        		String nameForm = userform.getName();
+        		String emailForm = userform.getEmail();
+        		String passwordForm = userform.getPassword();
+        		
+        		UserDB.editDBUser(nameForm, emailForm, passwordForm);
+        	}else {
+        		System.out.println("正しく入力してください"); 
+        	}
+        	
+        }
+    }
+    
+    // 特定の要素を削除する 
+//    public void memoContentDelete(){
+//    	
+//    	 System.out.print("\n削除したいTaskの番号を入力してください：　");
+//         int taskSerchCheack = this.taskSerch();
+//
+//         if(taskSerchCheack >= 0){
+//        	 System.out.println("\n削除処理を実行します");
+//        	 try{
+//        		 
+//        		 Task task = this.tasks.get(taskSerchCheack);
+//        		 int taskIdNumber = task.getId();
+//        		 TaskDB.deleteDBTasks(taskIdNumber);
+//        		 
+//        		 this.tasks.remove(taskSerchCheack);
+//        		 System.out.println("削除に成功しました");
+//        		 
+//        	 }catch(IndexOutOfBoundsException e){
+//        		 System.out.println("削除に失敗しました");
+//        	 }             
+//         }
+//    } 
 }

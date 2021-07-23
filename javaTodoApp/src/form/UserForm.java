@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import db.AccessKey;
+import main.Main;
 
 public class UserForm {
 	
@@ -45,6 +46,49 @@ public class UserForm {
         	this.setCheakCreate(true);
         }else {
         	this.setCheakCreate(false);
+        }
+        
+	}
+	
+	public UserForm(String name,String email,String password){
+        
+		boolean passwordStringCheak = true;
+		
+		if(name.isEmpty()) {
+			name = Main.user.getName();
+		}
+		if(email.isEmpty()) {
+			email = Main.user.getEmail();
+		}
+		
+		if(!password.isEmpty()){
+			passwordStringCheak = this.passWordCheak(password);
+			if(passwordStringCheak) {
+				try {
+					password = this.cryptoHash(password);
+				} catch (NoSuchAlgorithmException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}				
+			}
+		}
+		
+		if(password.isEmpty()) {
+			password = Main.user.getPassword();
+		}
+		
+		
+        boolean inputCount = this.inputCount(name);
+        
+        boolean emailStringCheak = this.emailCheak(email);
+        
+        if(inputCount && emailStringCheak && passwordStringCheak) {   
+        	this.name = name;
+        	this.email = email;
+        	this.password = password;
+        	this.cheakCreate = true;
+        }else {
+        	this.cheakCreate = false;
         }
         
 	}

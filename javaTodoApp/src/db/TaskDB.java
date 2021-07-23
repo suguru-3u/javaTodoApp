@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import main.Main;
 import model.Task;
 
 public class TaskDB {
@@ -14,7 +15,7 @@ public class TaskDB {
 //	Task登録メソッド
 	public static void createDBTasks(String title,String main) {
 		
-	    String SQL = "insert into tasks(title,main) VALUES(?,?)";
+	    String SQL = "insert into tasks(title,main,user_id) VALUES(?,?,?)";
 	        
         try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -23,6 +24,7 @@ public class TaskDB {
             try(PreparedStatement ps = conn.prepareStatement(SQL)){
                 ps.setString(1,title);
                 ps.setString(2,main);
+                ps.setInt(3,Main.user.getId());
                 
                 ps.executeUpdate();
                 conn.commit();
@@ -92,13 +94,13 @@ public class TaskDB {
 	}
 
 //	DBからTask情報を取得
-    public static List<Task> getDBTasks(List<Task> tasks) {
+    public static void getDBTasks(List<Task> tasks) {
     	
     	Connection con = null;
     	PreparedStatement ps = null;
     	ResultSet rs = null;
     	
-	    String SQL = "SELECT * FROM tasks where delete_flg = 0";
+	    String SQL = "SELECT * FROM tasks INNER JOIN users ON tasks.user_id = users.id where tasks.delete_flg = 0 and tasks.user_id = (?)";
 	    
 	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -106,16 +108,17 @@ public class TaskDB {
             
             try {
             	ps = conn.prepareStatement(SQL);
+            	ps.setInt(1,Main.user.getId());
             	rs = ps.executeQuery();                  
                 conn.commit();
                 
                 try {
-    				if(rs.next()) {
+//    				if(rs.next()) {
     					while (rs.next()) {
     						Task task = new Task(rs.getInt("id"),rs.getString("title"),rs.getString("main"),rs.getInt("delete_flg"));
     						tasks.add(task);      			
     					}				
-    				}
+//    				}
     			} catch (SQLException e) {
     				// TODO 自動生成された catch ブロック
     				e.printStackTrace();
@@ -131,6 +134,5 @@ public class TaskDB {
         }finally {
             System.out.println("DB処理が完了しました");       
         }
-	    return tasks;
     }
 }

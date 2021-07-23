@@ -27,13 +27,27 @@ public class TaskMemo implements Memo{
     public int getTasksNumbers(){
         return tasks.size();
     }
+    
+ // ユーザーがTaskを登録するメソッド
+    public void memoContentCreate(){
+        System.out.println("\n登録したいTaskを入力してください");
+
+        System.out.print("TaskのTitleを入力してください：　");
+        String taskTitle = KeyBord.inputKeyBordString();
+
+        System.out.print("TaskのMainを入力してください ：　");
+        String taskMain = KeyBord.inputKeyBordString();
+
+        TaskDB.createDBTasks(taskTitle,taskMain);
+
+    }
 
     // Task一覧の表示
     public void tasksShow(){
     	
-    	tasks.clear();
+    	this.tasks.clear();
     	
-    	List<Task> tasks = TaskDB.getDBTasks(this.tasks);
+    	TaskDB.getDBTasks(this.tasks);
     	
     	if(tasks.isEmpty()){
     		System.out.println("\n現在抱えているTaskはありません\n");
@@ -43,7 +57,7 @@ public class TaskMemo implements Memo{
     		System.out.println("Task数 ： " + this.getTasksNumbers() + "個");
     		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
     		System.out.println("");
-    		tasks.stream()
+    		this.tasks.stream()
     		.map(i -> "■ " + (tasks.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細   ：  " + i.getMain())
     		.forEach(i -> System.out.println(i));
     		System.out.println("");
@@ -51,39 +65,61 @@ public class TaskMemo implements Memo{
     }
     
     // Taskを更新するメソッド
-    public void updateTask(int taskNumber ,String title,String main){
-    	System.out.print("Taskの内容の変更を開始します");
+    public void memoContentEdit(){
     	
-    	Task task = this.tasks.get(taskNumber);
-    	int taskDBNumber = task.getId();        
+    	System.out.print("\n編集したいTaskの番号を入力してください：　");
+        int taskSerchCheack = this.taskSerch();
+
+        if(taskSerchCheack >= 0){
+
+            System.out.print("TaskのTitleを入力してください：　");
+            String taskTitleChange = KeyBord.inputKeyBordString();
+
+            System.out.print("TaskのMainを入力してください ：　");
+            String taskMainChange = KeyBord.inputKeyBordString();
+
+//            taskMemo.updateTask(taskSerchCheack,taskTitleChange,taskMainChange);
+            
+            System.out.print("Taskの内容の変更を開始します");
+            
+            Task task = this.tasks.get(taskSerchCheack);
+            int taskDBNumber = task.getId();        
+            
+            if(taskTitleChange.isEmpty()) {
+            	taskTitleChange = task.getTitle();        	
+            }
+            
+            if(taskMainChange.isEmpty()) {
+            	taskMainChange = task.getMain();        	
+            }	
+            
+            TaskDB.editDBTasks(taskDBNumber,taskTitleChange,taskMainChange);
+            System.out.print("Taskの内容の変更が終了しました");
+        }
     	
-    	if(title.isEmpty()) {
-    		title = task.getTitle();        	
-    	}
-    	
-    	if(main.isEmpty()) {
-    		main = task.getMain();        	
-    	}	
-    	
-    	TaskDB.editDBTasks(taskDBNumber,title,main);
-    	System.out.print("Taskの内容の変更が終了しました");
     }
     
     // 特定の要素を削除する 
-    public void deleteTask(int taskNumber){
-        System.out.println("\n削除処理を実行します");
-        try{
-        	
-        	Task task = this.tasks.get(taskNumber);
-        	int taskIdNumber = task.getId();
-        	TaskDB.deleteDBTasks(taskIdNumber);
-        	
-            this.tasks.remove(taskNumber);
-            System.out.println("削除に成功しました");
-            
-        }catch(IndexOutOfBoundsException e){
-            System.out.println("削除に失敗しました");
-        }
+    public void memoContentDelete(){
+    	
+    	 System.out.print("\n削除したいTaskの番号を入力してください：　");
+         int taskSerchCheack = this.taskSerch();
+
+         if(taskSerchCheack >= 0){
+        	 System.out.println("\n削除処理を実行します");
+        	 try{
+        		 
+        		 Task task = this.tasks.get(taskSerchCheack);
+        		 int taskIdNumber = task.getId();
+        		 TaskDB.deleteDBTasks(taskIdNumber);
+        		 
+        		 this.tasks.remove(taskSerchCheack);
+        		 System.out.println("削除に成功しました");
+        		 
+        	 }catch(IndexOutOfBoundsException e){
+        		 System.out.println("削除に失敗しました");
+        	 }             
+         }
     } 
 
     // 特定のTaskの検索メソッド
