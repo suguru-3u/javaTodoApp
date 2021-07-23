@@ -10,6 +10,11 @@ public class User extends Human{
         super.setPassword(password);
         super.setAdminflg(adminFlg);
         super.setDeleteflg(deleteFlg);
-    } 
+    }
+    
+    public String toString() {
+    	String user = "名前：　" + super.getName() + "\nemail:　" + super.getEmail() + "\npasword：　" + super.getPassword();
+        return user;
+    }
     
 }

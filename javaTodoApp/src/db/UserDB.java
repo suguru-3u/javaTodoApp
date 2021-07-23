@@ -117,18 +117,19 @@ public class UserDB {
 	}
 	
 	//	ユーザー情報の編集
-	public static void editDBTasks(int id ,String title,String main) {
+	public static void editDBUser(String name,String email,String password) {
 		
-	    String SQL = "update tasks set title = (?),main = (?) where id = (?)";
+	    String SQL = "update users set name = (?), email = (?), password = (?) where id = (?)";
 	        
         try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
             conn.setAutoCommit(false);
             
             try(PreparedStatement ps = conn.prepareStatement(SQL)){
-            	ps.setString(1,title);
-            	ps.setString(2,main);
-                ps.setInt(3,id);
+            	ps.setString(1,name);
+            	ps.setString(2,email);
+            	ps.setString(3,password);
+                ps.setInt(4,Main.user.getId());
                    
                 ps.executeUpdate();
                 conn.commit();
@@ -143,6 +144,47 @@ public class UserDB {
         }finally {
             System.out.println("DB変更の処理が完了しました");
         }
+	}
+	
+//	ユーザーログイン
+	public static void userSerch() {
+		
+		ResultSet rs = null;
+		
+		 String SQL = "SELECT * FROM users WHERE id = (?)";
+	        
+	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+
+	            conn.setAutoCommit(false);
+	            
+	            try(PreparedStatement ps = conn.prepareStatement(SQL)){            
+	                ps.setInt(1,Main.user.getId());
+	                
+	                rs = ps.executeQuery();    
+	                
+	                conn.commit();
+	                
+//	                if(rs.next()) {
+    					while (rs.next()) {
+    						Main.user  = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+    											 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
+    						
+    						Main.appp = false;
+    					}
+//    				}else {
+//    					S	ystem.out.println("対象ユーザーが見つかりませんでした");    					
+//    				}
+	                
+	            } catch (Exception e) {
+	                conn.rollback();
+	                System.out.println("rollback");
+	                throw e;    
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }finally {
+	            System.out.println("DB処理が完了しました");
+	        }
 	}
 
 	//	DBからユーザー情報を取得

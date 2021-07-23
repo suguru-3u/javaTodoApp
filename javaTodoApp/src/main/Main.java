@@ -1,5 +1,6 @@
 package main;
 
+import db.UserDB;
 import form.KeyBord;
 import model.User;
 import note.TaskMemo;
@@ -14,8 +15,7 @@ public class Main{
 	
 	public static void main(String[] args){
 	
-  // インスタンス変数生成
-    TaskMemo taskMemo = new TaskMemo();
+  
     
     boolean app = true;
     
@@ -49,36 +49,61 @@ public class Main{
     // Taskメイン機能
     while(app){
     	
-      taskMemo.tasksShow();
+    	TaskMemo taskMemo = new TaskMemo();
+    	
+    	taskMemo.tasksShow();
+    	UserDB.userSerch();
 
-      System.out.print("Taskを入力する場合は「1」、Taskを削除する場合は「２」、Taskを編集する場合は「３」、終了する場合は「５」を入力してください　：");
+    	System.out.print("Task関係は「1」、User関係は「２」終了する場合は「５」を入力してください　：");
 
-      int yoursTask = KeyBord.inputKeyBordInt();
+    	int yoursTask = KeyBord.inputKeyBordInt();
 
-      switch(yoursTask){
+    	switch(yoursTask){
 
-        // Task登録処理
-        case 1 :
-        	taskMemo.memoContentCreate();
-        	break;
-
-        // Task削除処理
-        case 2 :
-        	taskMemo.memoContentDelete();
-	        break;
-
-        // Task内容変更処理
-        case 3 :
-        	taskMemo.memoContentEdit();
-	        break;
-
-        case 5 :
-        	System.exit(0);
-        	break;
-
-        default:
-          System.out.print("正しく入力してください");
-          break;
+	        // Taskに関する処理
+	        case 1 :
+	        	
+	        	 System.out.print("Taskを登録する場合は「1」、Taskを削除する場合は「２」、Taskを編集する場合は「３」を入力してください　：");
+	             int tasknumber = KeyBord.inputKeyBordInt();   
+	             
+	             if(tasknumber == 1) {
+	            	 taskMemo.memoContentCreate();
+	             }else if(tasknumber == 2) {
+	            	 taskMemo.memoContentDelete();
+	             }else if(tasknumber == 3) {
+	            	 taskMemo.memoContentEdit();
+	             }else {
+	            	 System.out.print("正しく入力してください");
+	             }    	
+	        	break;
+	
+	        // Userに関する処理
+	        case 2 :
+	        	
+	        	System.out.print("User情報の変更は「1」、アプリを退会する場合は「２」を入力してください：");
+	            int userknumber = KeyBord.inputKeyBordInt();   
+	            
+	            if(userknumber == 1) {
+	            	UserMemo.memoContentEdit();
+	            }else if(userknumber == 2) {
+	            	UserMemo.userCreate();
+	            }else {
+	           	 System.out.print("正しく入力してください");
+	            }    	
+	            break;
+	
+	        // Task内容変更処理
+	        case 3 :
+	        	
+		        break;
+	
+	        case 5 :
+	        	System.exit(0);
+	        	break;
+	
+	        default:
+	          System.out.print("正しく入力してください");
+	          break;
       }
     }
   }
