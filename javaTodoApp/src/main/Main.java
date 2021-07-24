@@ -86,7 +86,7 @@ public class Main{
 	            if(userknumber == 1) {
 	            	UserMemo.memoContentEdit();
 	            }else if(userknumber == 2) {
-	            	UserMemo.userCreate();
+	            	UserMemo.memoContentDelete();
 	            }else {
 	           	 System.out.print("正しく入力してください");
 	            }    	

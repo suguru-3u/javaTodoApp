@@ -53,7 +53,7 @@ public class UserDB {
 		
 		ResultSet rs = null;
 		
-		 String SQL = "SELECT * FROM users WHERE email = (?) and password = (?)";
+		 String SQL = "SELECT * FROM users WHERE email = (?) and password = (?) and delete_flg = 0";
 	        
 	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -91,15 +91,15 @@ public class UserDB {
 	}
 
 	//	ユーザー情報の削除
-	public static void deleteDBTasks(int id) {
+	public static void deleteDBUser(int id) {
 		
-	    String SQL = "delete from tasks where id = (?)";
+	    String SQL = "update users set delete_flg = 1  where id = (?)";
 	        
         try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
             conn.setAutoCommit(false);
             
-            try(PreparedStatement ps = conn.prepareStatement(SQL)){
+            try(PreparedStatement ps = conn.prepareStatement(SQL)){           
                 ps.setInt(1,id);
                    
                 ps.executeUpdate();
@@ -112,7 +112,7 @@ public class UserDB {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            System.out.println("処理が完了しました");
+            System.out.println("退会処理が完了しました");
         }
 	}
 	
@@ -142,7 +142,7 @@ public class UserDB {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            System.out.println("DB変更の処理が完了しました");
+            System.out.println("DB情報の変更処理が完了しました");
         }
 	}
 	
@@ -151,7 +151,7 @@ public class UserDB {
 		
 		ResultSet rs = null;
 		
-		 String SQL = "SELECT * FROM users WHERE id = (?)";
+		 String SQL = "SELECT * FROM users WHERE id = (?) and delete_flg = 0";
 	        
 	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
