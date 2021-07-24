@@ -133,24 +133,24 @@ public class UserMemo {
          }
     } 
     
-    public void usersShow(){
-    	
-    	this.users.clear();
-    	
-    	UserDB.getDBUser(this.users);
-    	
-    	if(users.isEmpty()){
-    		System.out.println("\n現在登録しているユーザーはいません\n");
-    	}else{
-    		System.out.println("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-    		System.out.println("user情報");
-    		System.out.println("user数 ： " + this.getUserNumbers() + "人");
-    		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-    		System.out.println("");
-    		this.users.stream()
-    		.map(i -> "■ " + i.getId() + "\n名前：　" + i.getName() + "\nメールアドレス：  " + i.getEmail())
-    		.forEach(i -> System.out.println(i));
-    		System.out.println("");
-    	}
-    }
+//    public void usersShow(){
+//    	
+//    	this.users.clear();
+//    	
+//    	UserDB.getDBUser(this.users);
+//    	
+//    	if(users.isEmpty()){
+//    		System.out.println("\n現在登録しているユーザーはいません\n");
+//    	}else{
+//    		System.out.println("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+//    		System.out.println("user情報");
+//    		System.out.println("user数 ： " + this.getUserNumbers() + "人");
+//    		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+//    		System.out.println("");
+//    		this.users.stream()
+//    		.map(i -> "■ " + (users.index(i)  + 1 ) + "\n名前：　" + i.getName() + "\nメールアドレス：  " + i.getEmail())
+//    		.forEach(i -> System.out.println(i));
+//    		System.out.println("");
+//    	}
+//    }
 }

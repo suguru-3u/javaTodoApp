@@ -15,9 +15,7 @@ public class Main{
 	public static User user = null;
 	
 	public static void main(String[] args){
-	
-  
-    
+	  
     boolean app = true;
     
 	System.out.println("ようこそJavaTodoAppへ");
@@ -51,11 +49,12 @@ public class Main{
     while(app){
     	
     	UserDB.userSerch();
+    	TaskMemo taskMemo = new TaskMemo();
     	
     	int userAdminFlg = Main.user.getAdminflg();
     	
     	if(userAdminFlg == 0) {
-    		TaskMemo taskMemo = new TaskMemo();
+    		
     		
     		taskMemo.tasksShow();
     		
@@ -112,11 +111,9 @@ public class Main{
     		}
     		
     	}else {
-    		AdminMemo adminmemo = new AdminMemo();
+    		AdminMemo adminmemo = new AdminMemo(); 		
     		
-    		adminmemo.usersShow();
-    		
-    		System.out.print("User関係は「1」、お問い合わせ関係は「２」終了する場合は「５」を入力してください　：");
+    		System.out.print("User関係は「1」、Task関係は「２」終了する場合は「５」を入力してください　：");
     		
     		int yoursTask = KeyBord.inputKeyBordInt();
     		
@@ -125,15 +122,35 @@ public class Main{
     		// Taskに関する処理
     		case 1 :
     			
+    			adminmemo.usersShow();
+    			
     			System.out.print("Userを登録する場合は「1」、Userを削除する場合は「２」、Userを編集する場合は「３」を入力してください　：");
+    			int userNumber = KeyBord.inputKeyBordInt();   
+    			
+    			if(userNumber == 1) {
+    				UserMemo.userCreate();
+    			}else if(userNumber == 2) {
+    				adminmemo.memoContentDelete();
+    			}else if(userNumber == 3) {
+    				adminmemo.memoContentEdit();
+    			}else {
+    				System.out.print("正しく入力してください");
+    			}    	
+    			break;
+    			
+    		case 2:
+    			
+    			taskMemo.tasksAllIndex();
+    			
+    			System.out.print("Taskを登録する場合は「1」、Taskを削除する場合は「２」、Taskを編集する場合は「３」を入力してください　：");
     			int tasknumber = KeyBord.inputKeyBordInt();   
     			
     			if(tasknumber == 1) {
-    				UserMemo.userCreate();
+    				taskMemo.memoContentCreate();
     			}else if(tasknumber == 2) {
-    				adminmemo.memoContentDelete();
+    				taskMemo.memoContentDelete();
     			}else if(tasknumber == 3) {
-    				adminmemo.memoContentEdit();
+    				taskMemo.memoContentEdit();
     			}else {
     				System.out.print("正しく入力してください");
     			}    	

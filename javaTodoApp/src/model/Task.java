@@ -12,14 +12,24 @@ public class Task{
     private String title;
     private String main;
     private int finishFlg;
+    private int userId;
     
 
-    // コンストラクト
-    public Task(int id, String title,String main,int finishFlg){
+//    // コンストラクト
+//    public Task(int id, String title,String main,int finishFlg){
+//    	this.id = id;
+//        this.title = title;
+//        this.main = main;
+//        this.finishFlg = finishFlg;
+//    }
+    
+ // コンストラクト
+    public Task(int id, String title,String main,int finishFlg,int userId){
     	this.id = id;
         this.title = title;
         this.main = main;
         this.finishFlg = finishFlg;
+        this.userId = userId;
     }
 
      // Titleフィールドの呼び出し
@@ -55,6 +65,11 @@ public class Task{
     // FinishFlgフィールドの呼び出し
     public int getFinishFlg(){
         return this.finishFlg;
+    }
+    
+    // FinishFlgフィールドの呼び出し
+    public int getUserId(){
+        return this.userId;
     }
 
     // クラスの内容表示メソッド

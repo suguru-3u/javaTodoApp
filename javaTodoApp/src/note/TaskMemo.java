@@ -58,7 +58,30 @@ public class TaskMemo implements Memo{
     		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
     		System.out.println("");
     		this.tasks.stream()
-    		.map(i -> "■ " + (tasks.indexOf(i) + 1) + "\nタイトル：　" + i.getTitle() + "\n詳細   ：  " + i.getMain())
+    		.map(i -> "■ " + (tasks.indexOf(i) + 1)   + "\nタイトル：　" + i.getTitle() + "\n詳細   ：  " + i.getMain())
+    		.forEach(i -> System.out.println(i));
+    		System.out.println("");
+    	}
+    }
+    
+ // Task一覧の表示
+    public void tasksAllIndex(){
+    	
+    	this.tasks.clear();
+    	
+    	TaskDB.getDBAllTasks(this.tasks);
+    	
+    	if(tasks.isEmpty()){
+    		System.out.println("\n現在抱えているTaskはありません\n");
+    	}else{
+    		System.out.println("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    		System.out.println("Task情報");
+    		System.out.println("Task数 ： " + this.getTasksNumbers() + "個");
+    		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    		System.out.println("");
+    		this.tasks.stream()
+    		.map(i -> "■ " + (tasks.indexOf(i) + 1)  + "\nタイトル：　" + i.getTitle() + "\n詳細   ：  " + i.getMain() 
+    		+ "\n登録ユーザーID　：" + i.getUserId())
     		.forEach(i -> System.out.println(i));
     		System.out.println("");
     	}
@@ -77,8 +100,6 @@ public class TaskMemo implements Memo{
 
             System.out.print("TaskのMainを入力してください ：　");
             String taskMainChange = KeyBord.inputKeyBordString();
-
-//            taskMemo.updateTask(taskSerchCheack,taskTitleChange,taskMainChange);
             
             System.out.print("Taskの内容の変更を開始します");
             
