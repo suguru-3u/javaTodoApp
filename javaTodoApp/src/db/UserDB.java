@@ -193,7 +193,7 @@ public class UserDB {
     	PreparedStatement ps = null;
     	ResultSet rs = null;
     	
-	    String SQL = "SELECT * FROM tasks where delete_flg = 0";
+	    String SQL = "SELECT * FROM users";
 	    
 	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -205,13 +205,13 @@ public class UserDB {
                 conn.commit();
                 
                 try {
-    				if(rs.next()) {
+    				
     					while (rs.next()) {
     						User user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
 									 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
     						users.add(user);      			
     					}				
-    				}
+    				
     			} catch (SQLException e) {
     				// TODO 自動生成された catch ブロック
     				e.printStackTrace();

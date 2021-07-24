@@ -3,6 +3,7 @@ package main;
 import db.UserDB;
 import form.KeyBord;
 import model.User;
+import note.AdminMemo;
 import note.TaskMemo;
 import note.UserMemo;
 
@@ -111,9 +112,9 @@ public class Main{
     		}
     		
     	}else {
-    		UserMemo userMemo = new UserMemo();
+    		AdminMemo adminmemo = new AdminMemo();
     		
-    		userMemo.usersShow();
+    		adminmemo.usersShow();
     		
     		System.out.print("User関係は「1」、お問い合わせ関係は「２」終了する場合は「５」を入力してください　：");
     		
@@ -124,18 +125,18 @@ public class Main{
     		// Taskに関する処理
     		case 1 :
     			
-    			System.out.print("Taskを登録する場合は「1」、Taskを削除する場合は「２」、Taskを編集する場合は「３」を入力してください　：");
+    			System.out.print("Userを登録する場合は「1」、Userを削除する場合は「２」、Userを編集する場合は「３」を入力してください　：");
     			int tasknumber = KeyBord.inputKeyBordInt();   
     			
-//    			if(tasknumber == 1) {
-//    				userMemo.memoContentCreate();
-//    			}else if(tasknumber == 2) {
-//    				userMemo.memoContentDelete();
-//    			}else if(tasknumber == 3) {
-//    				userMemo.memoContentEdit();
-//    			}else {
-//    				System.out.print("正しく入力してください");
-//    			}    	
+    			if(tasknumber == 1) {
+    				UserMemo.userCreate();
+    			}else if(tasknumber == 2) {
+    				adminmemo.memoContentEdit();
+    			}else if(tasknumber == 3) {
+    				adminmemo.memoContentEdit();
+    			}else {
+    				System.out.print("正しく入力してください");
+    			}    	
     			break;
     			
     		case 5 :
