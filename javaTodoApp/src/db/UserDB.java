@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import main.Main;
-import model.Task;
 import model.User;
 
 public class UserDB {
@@ -188,7 +187,7 @@ public class UserDB {
 	}
 
 	//	DBからユーザー情報を取得
-    public static List<Task> getDBUser(List<Task> tasks) {
+    public static List<User> getDBUser(List<User> users) {
     	
     	Connection con = null;
     	PreparedStatement ps = null;
@@ -208,8 +207,9 @@ public class UserDB {
                 try {
     				if(rs.next()) {
     					while (rs.next()) {
-    						Task task = new Task(rs.getInt("id"),rs.getString("title"),rs.getString("main"),rs.getInt("delete_flg"));
-    						tasks.add(task);      			
+    						User user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+									 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
+    						users.add(user);      			
     					}				
     				}
     			} catch (SQLException e) {
@@ -227,6 +227,6 @@ public class UserDB {
         }finally {
             System.out.println("DB処理が完了しました");       
         }
-	    return tasks;
+	    return users;
     }
 }

@@ -17,6 +17,10 @@ public class UserMemo {
 	
 	 // ユーザー情報
     private List<User>  users = new ArrayList<User>();
+    
+    public int getUserNumbers(){
+        return users.size();
+    }
 	
     // ユーザー情報ログイン情報
     public static void userLogin() {
@@ -128,4 +132,25 @@ public class UserMemo {
         	 System.out.print("\n退会処理を中止します。");   	  	
          }
     } 
+    
+    public void usersShow(){
+    	
+    	this.users.clear();
+    	
+    	UserDB.getDBUser(this.users);
+    	
+    	if(users.isEmpty()){
+    		System.out.println("\n現在登録しているユーザーはいません\n");
+    	}else{
+    		System.out.println("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    		System.out.println("user情報");
+    		System.out.println("user数 ： " + this.getUserNumbers() + "人");
+    		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+    		System.out.println("");
+    		this.users.stream()
+    		.map(i -> "■ " + i.getId() + "\n名前：　" + i.getName() + "\nメールアドレス：  " + i.getEmail())
+    		.forEach(i -> System.out.println(i));
+    		System.out.println("");
+    	}
+    }
 }
