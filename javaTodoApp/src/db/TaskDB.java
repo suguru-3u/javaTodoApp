@@ -113,12 +113,49 @@ public class TaskDB {
                 conn.commit();
                 
                 try {
-//    				if(rs.next()) {
-    					while (rs.next()) {
-    						Task task = new Task(rs.getInt("id"),rs.getString("title"),rs.getString("main"),rs.getInt("delete_flg"));
-    						tasks.add(task);      			
-    					}				
-//    				}
+    				while (rs.next()) {
+					Task task = new Task(rs.getInt("id"),rs.getString("title"),rs.getString("main"),rs.getInt("delete_flg"),rs.getInt("user_id"));
+					tasks.add(task);      			
+    				}			
+    			} catch (SQLException e) {
+    				// TODO 自動生成された catch ブロック
+    				e.printStackTrace();
+    			}
+                
+            } catch (Exception e) {
+                conn.rollback();
+                System.out.println("rollback");
+                throw e;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            System.out.println("DB処理が完了しました");       
+        }
+    }
+    
+    public static void getDBAllTasks(List<Task> tasks) {
+    	
+    	Connection con = null;
+    	PreparedStatement ps = null;
+    	ResultSet rs = null;
+    	
+	    String SQL = "SELECT * FROM tasks";
+	    
+	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+
+            conn.setAutoCommit(false);
+            
+            try {
+            	ps = conn.prepareStatement(SQL);
+            	rs = ps.executeQuery();                  
+                conn.commit();
+                
+                try {
+					while (rs.next()) {
+						Task task = new Task(rs.getInt("id"),rs.getString("title"),rs.getString("main"),rs.getInt("delete_flg"),rs.getInt("user_id"));
+						tasks.add(task);      			
+					}				
     			} catch (SQLException e) {
     				// TODO 自動生成された catch ブロック
     				e.printStackTrace();

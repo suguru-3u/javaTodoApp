@@ -63,8 +63,12 @@ abstract class Human{
     }
 
     // 名前をインスタンス変数から取得
-    public int getDeleteflg(){
-        return this.deleteflg;
+    public String getDeleteflg(){
+    	if(this.deleteflg == 0) {
+    		return "\n利用中";
+    	}else {
+    		return "\n退会済み";
+    	}
     }
 
 }

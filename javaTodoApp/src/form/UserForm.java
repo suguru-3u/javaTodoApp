@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import db.AccessKey;
 import main.Main;
+import model.User;
 
 public class UserForm {
 	
@@ -75,6 +76,49 @@ public class UserForm {
 		
 		if(password.isEmpty()) {
 			password = Main.user.getPassword();
+		}
+		
+		
+        boolean inputCount = this.inputCount(name);
+        
+        boolean emailStringCheak = this.emailCheak(email);
+        
+        if(inputCount && emailStringCheak && passwordStringCheak) {   
+        	this.name = name;
+        	this.email = email;
+        	this.password = password;
+        	this.cheakCreate = true;
+        }else {
+        	this.cheakCreate = false;
+        }
+        
+	}
+	
+	public UserForm(String name,String email,String password,User user){
+        
+		boolean passwordStringCheak = true;
+		
+		if(name.isEmpty()) {
+			name = user.getName();
+		}
+		if(email.isEmpty()) {
+			email = user.getEmail();
+		}
+		
+		if(!password.isEmpty()){
+			passwordStringCheak = this.passWordCheak(password);
+			if(passwordStringCheak) {
+				try {
+					password = this.cryptoHash(password);
+				} catch (NoSuchAlgorithmException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}				
+			}
+		}
+		
+		if(password.isEmpty()) {
+			password = user.getPassword();
 		}
 		
 		

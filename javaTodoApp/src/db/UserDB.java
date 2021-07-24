@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import main.Main;
-import model.Task;
 import model.User;
 
 public class UserDB {
@@ -53,7 +52,7 @@ public class UserDB {
 		
 		ResultSet rs = null;
 		
-		 String SQL = "SELECT * FROM users WHERE email = (?) and password = (?)";
+		 String SQL = "SELECT * FROM users WHERE email = (?) and password = (?) and delete_flg = 0";
 	        
 	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -91,15 +90,15 @@ public class UserDB {
 	}
 
 	//	ユーザー情報の削除
-	public static void deleteDBTasks(int id) {
+	public static void deleteDBUser(int id) {
 		
-	    String SQL = "delete from tasks where id = (?)";
+	    String SQL = "update users set delete_flg = 1  where id = (?)";
 	        
         try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
             conn.setAutoCommit(false);
             
-            try(PreparedStatement ps = conn.prepareStatement(SQL)){
+            try(PreparedStatement ps = conn.prepareStatement(SQL)){           
                 ps.setInt(1,id);
                    
                 ps.executeUpdate();
@@ -112,7 +111,7 @@ public class UserDB {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            System.out.println("処理が完了しました");
+            System.out.println("退会処理が完了しました");
         }
 	}
 	
@@ -142,7 +141,7 @@ public class UserDB {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            System.out.println("DB変更の処理が完了しました");
+            System.out.println("DB情報の変更処理が完了しました");
         }
 	}
 	
@@ -151,7 +150,7 @@ public class UserDB {
 		
 		ResultSet rs = null;
 		
-		 String SQL = "SELECT * FROM users WHERE id = (?)";
+		 String SQL = "SELECT * FROM users WHERE id = (?) and delete_flg = 0";
 	        
 	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -188,13 +187,13 @@ public class UserDB {
 	}
 
 	//	DBからユーザー情報を取得
-    public static List<Task> getDBUser(List<Task> tasks) {
+    public static List<User> getDBUser(List<User> users) {
     	
     	Connection con = null;
     	PreparedStatement ps = null;
     	ResultSet rs = null;
     	
-	    String SQL = "SELECT * FROM tasks where delete_flg = 0";
+	    String SQL = "SELECT * FROM users";
 	    
 	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
 
@@ -206,12 +205,13 @@ public class UserDB {
                 conn.commit();
                 
                 try {
-    				if(rs.next()) {
+    				
     					while (rs.next()) {
-    						Task task = new Task(rs.getInt("id"),rs.getString("title"),rs.getString("main"),rs.getInt("delete_flg"));
-    						tasks.add(task);      			
+    						User user = new User(rs.getInt("id"),rs.getString("name"),rs.getString("email"),
+									 rs.getString("password"),rs.getInt("admin_flg"),rs.getInt("delete_flg"));
+    						users.add(user);      			
     					}				
-    				}
+    				
     			} catch (SQLException e) {
     				// TODO 自動生成された catch ブロック
     				e.printStackTrace();
@@ -227,6 +227,6 @@ public class UserDB {
         }finally {
             System.out.println("DB処理が完了しました");       
         }
-	    return tasks;
+	    return users;
     }
 }

@@ -17,6 +17,10 @@ public class UserMemo {
 	
 	 // ユーザー情報
     private List<User>  users = new ArrayList<User>();
+    
+    public int getUserNumbers(){
+        return users.size();
+    }
 	
     // ユーザー情報ログイン情報
     public static void userLogin() {
@@ -103,26 +107,50 @@ public class UserMemo {
         }
     }
     
-    // 特定の要素を削除する 
-//    public void memoContentDelete(){
+//     特定の要素を削除する 
+    public static void memoContentDelete(){
+    	
+    	 System.out.print("\n退会のご案内です。\n退会されますとデータが消えてしまい復元することができな区なりますが、よろしいですか？");
+    	 System.out.print("\n退会する場合は「y」を入力してください");   	  	
+     	 String taskJugeAnwser = KeyBord.inputKeyBordString();
+     	
+         if(taskJugeAnwser.equals("y")){	
+        	System.out.print("\nUser情報を表示します");   	
+         	System.out.print(Main.user);
+         	
+         	System.out.print("\n本当に退会する場合は「y」を入力してください");   	  	
+        	String deleteAnwser = KeyBord.inputKeyBordString();
+        	
+            if(deleteAnwser.equals("y")){
+            	int userID = Main.user.getId();
+            	UserDB.deleteDBUser(userID);
+            	System.exit(0);
+            }else{
+            	System.out.print("\n退会処理を中止します。");  
+            }
+         }else {
+        	 System.out.print("\n退会処理を中止します。");   	  	
+         }
+    } 
+    
+//    public void usersShow(){
 //    	
-//    	 System.out.print("\n削除したいTaskの番号を入力してください：　");
-//         int taskSerchCheack = this.taskSerch();
-//
-//         if(taskSerchCheack >= 0){
-//        	 System.out.println("\n削除処理を実行します");
-//        	 try{
-//        		 
-//        		 Task task = this.tasks.get(taskSerchCheack);
-//        		 int taskIdNumber = task.getId();
-//        		 TaskDB.deleteDBTasks(taskIdNumber);
-//        		 
-//        		 this.tasks.remove(taskSerchCheack);
-//        		 System.out.println("削除に成功しました");
-//        		 
-//        	 }catch(IndexOutOfBoundsException e){
-//        		 System.out.println("削除に失敗しました");
-//        	 }             
-//         }
-//    } 
+//    	this.users.clear();
+//    	
+//    	UserDB.getDBUser(this.users);
+//    	
+//    	if(users.isEmpty()){
+//    		System.out.println("\n現在登録しているユーザーはいません\n");
+//    	}else{
+//    		System.out.println("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+//    		System.out.println("user情報");
+//    		System.out.println("user数 ： " + this.getUserNumbers() + "人");
+//    		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+//    		System.out.println("");
+//    		this.users.stream()
+//    		.map(i -> "■ " + (users.index(i)  + 1 ) + "\n名前：　" + i.getName() + "\nメールアドレス：  " + i.getEmail())
+//    		.forEach(i -> System.out.println(i));
+//    		System.out.println("");
+//    	}
+//    }
 }
