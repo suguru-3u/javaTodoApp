@@ -131,7 +131,7 @@ public class Main{
     			if(tasknumber == 1) {
     				UserMemo.userCreate();
     			}else if(tasknumber == 2) {
-//    				adminmemo.memoContentEdit();
+    				adminmemo.memoContentDelete();
     			}else if(tasknumber == 3) {
     				adminmemo.memoContentEdit();
     			}else {
