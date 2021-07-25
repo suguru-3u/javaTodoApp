@@ -39,7 +39,6 @@ public class KeyBord{
 
         } catch (InputMismatchException e) {
             System.out.println("入力エラーを検知しました");
-            System.out.println(e.getMessage());
             return yoursTask;
         }
 
