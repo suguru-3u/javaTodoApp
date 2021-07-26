@@ -13,16 +13,6 @@ public class TaskMemo implements Memo{
     // Taskを格納するフィールド
     private List<Task> tasks = new ArrayList<Task>();
 
-    // Taskを格納するメソッド
-    public void setTasks(Task task){
-        this.tasks.add(task);
-    }
-
-//    Task一覧を取得
-    public List<Task> getTasks(){
-        return this.tasks;
-    }
-
     // 登録されているTask数の取得
     public int getTasksNumbers(){
         return tasks.size();

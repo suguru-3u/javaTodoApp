@@ -23,26 +23,26 @@ public class Main{
     //ログイン、会員登録
 	while(appp){
 		System.out.println("ログインは「1」、会員登録は「2」、アプリを終了する場合は「3」を入力してください");
-		int a = KeyBord.inputKeyBordInt();
+		int inputSelectNumber = KeyBord.inputFirstSelectNumber();
 		
-		switch(a){
+		switch(inputSelectNumber){
 	
-	    case 1 :
-	    	UserMemo.userLogin();
-	    	break;
-	
-	    case 2 :
-    		UserMemo.userCreate();
-    		break;
-	      
-	    case 3 :
-	    	System.exit(0);
-	    	break;
-	      
-	    default:
-	    	System.out.println("正しく入力してください");
-	    	break;
-		}
+		    case 1 :    	
+		    	UserMemo.userLogin();
+		    	break;
+		
+		    case 2 :
+	    		UserMemo.userCreate();
+	    		break;
+		      
+		    case 3 :
+		    	System.exit(0);
+		    	break;
+		      
+		    default:
+		    	System.out.println("正しく入力してください");
+		    	break;
+			}
 	}
 	
     // Taskメイン機能

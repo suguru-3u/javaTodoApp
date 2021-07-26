@@ -13,6 +13,7 @@ public class User extends Human{
     }
     
     public String toString() {
+    	System.out.print("\nUser情報を表示します");   	
     	String user = "名前：　" + super.getName() + "\nemail:　" + super.getEmail() + "\npasword：　" + super.getPassword();
         return user;
     }
