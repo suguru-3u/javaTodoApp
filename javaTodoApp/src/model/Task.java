@@ -14,15 +14,6 @@ public class Task{
     private int finishFlg;
     private int userId;
     
-
-//    // コンストラクト
-//    public Task(int id, String title,String main,int finishFlg){
-//    	this.id = id;
-//        this.title = title;
-//        this.main = main;
-//        this.finishFlg = finishFlg;
-//    }
-    
  // コンストラクト
     public Task(int id, String title,String main,int finishFlg,int userId){
     	this.id = id;

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import db.TaskDB;
 import form.KeyBord;
+import form.TaskForm;
 import model.Task;
 
 public class TaskMemo implements Memo{
@@ -22,14 +23,18 @@ public class TaskMemo implements Memo{
     public void memoContentCreate(){
         System.out.println("\n登録したいTaskを入力してください");
 
-        System.out.print("TaskのTitleを入力してください：　");
-        String taskTitle = KeyBord.inputKeyBordString();
-
-        System.out.print("TaskのMainを入力してください ：　");
-        String taskMain = KeyBord.inputKeyBordString();
-
-        TaskDB.createDBTasks(taskTitle,taskMain);
-
+        String taskTitle = KeyBord.inputTaskTitle();
+        String taskMain = KeyBord.inputTaskMain();
+        
+        boolean inputCheakEmptyTitle = KeyBord.inputStringCheakEmpty(taskTitle); 
+        boolean inputCheakEmptyMain = KeyBord.inputStringCheakEmpty(taskMain); 
+        
+        if(inputCheakEmptyTitle && inputCheakEmptyMain) {
+        	 System.out.println("\n空白では入力しないでください");
+        }else {
+        	TaskForm taskForm = new TaskForm(taskTitle,taskMain); 
+        	TaskDB.createDBTasks(taskForm);        	
+        }
     }
 
     // Task一覧の表示

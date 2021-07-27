@@ -53,6 +53,26 @@ public class KeyBord{
 		}
 		return true;
 	}
+	
+	public static String inputTaskTitle() {
+		System.out.println("TaskのTitleを入力してください：　");
+	    String inputTaskTitle = KeyBord.inputKeyBordString();
+	    return inputTaskTitle;
+	}
+	
+	public static String inputTaskMain() {
+		System.out.println("TaskのMainを入力してください：　");
+	    String inputTaskMain = KeyBord.inputKeyBordString();
+	    return inputTaskMain;
+	}
+	
+	public static boolean inputStringCheakEmpty(String inputString){
+		if(inputString.isEmpty()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 
     public static String inputKeyBordString(){
     	

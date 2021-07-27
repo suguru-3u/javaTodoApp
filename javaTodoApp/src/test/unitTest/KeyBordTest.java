@@ -12,6 +12,27 @@ import form.KeyBord;
 
 class KeyBordTest {
 	
+	
+	@Test
+	public void testInputTaskTitle() {
+		String taskTitle = "test";
+		InputStream in = new ByteArrayInputStream(taskTitle.getBytes());
+	    System.setIn(in);
+	    
+		String inputTaskTitle = KeyBord.inputTaskTitle();
+		assertThat("test", is(inputTaskTitle));
+	}
+	
+	@Test
+	public void testInputTaskMain() {
+		String taskTitle = "testMain";
+		InputStream in = new ByteArrayInputStream(taskTitle.getBytes());
+	    System.setIn(in);
+	    
+		String inputTaskTitle = KeyBord.inputTaskMain();
+		assertThat("testMain", is(inputTaskTitle));
+	}
+	
 	@Test
 	public void tesInputKeyBordString() {
 		String input = "test";
@@ -91,6 +112,22 @@ class KeyBordTest {
 		
 		int inputInt = KeyBord.inputKeyBordInt();
 		assertThat(0, is(inputInt));	
+	}
+	
+	@Test
+	public void testInputStringCheakEmpty() {
+		String inputString = "";
+	    
+		boolean emailcheak = KeyBord.inputStringCheakEmpty(inputString);
+		assertThat(true, is(emailcheak));
+	}
+	
+	@Test
+	public void testInputStringCheakNoEmpty() {
+		String inputString = "a";
+	    
+		boolean emailcheak = KeyBord.inputStringCheakEmpty(inputString);
+		assertThat(false, is(emailcheak));
 	}
 
 }
