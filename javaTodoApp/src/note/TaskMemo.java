@@ -6,22 +6,13 @@ import java.util.stream.Collectors;
 
 import db.TaskDB;
 import form.KeyBord;
+import form.TaskForm;
 import model.Task;
 
 public class TaskMemo implements Memo{
 
     // Taskを格納するフィールド
     private List<Task> tasks = new ArrayList<Task>();
-
-    // Taskを格納するメソッド
-    public void setTasks(Task task){
-        this.tasks.add(task);
-    }
-
-//    Task一覧を取得
-    public List<Task> getTasks(){
-        return this.tasks;
-    }
 
     // 登録されているTask数の取得
     public int getTasksNumbers(){
@@ -32,14 +23,18 @@ public class TaskMemo implements Memo{
     public void memoContentCreate(){
         System.out.println("\n登録したいTaskを入力してください");
 
-        System.out.print("TaskのTitleを入力してください：　");
-        String taskTitle = KeyBord.inputKeyBordString();
-
-        System.out.print("TaskのMainを入力してください ：　");
-        String taskMain = KeyBord.inputKeyBordString();
-
-        TaskDB.createDBTasks(taskTitle,taskMain);
-
+        String taskTitle = KeyBord.inputTaskTitle();
+        String taskMain = KeyBord.inputTaskMain();
+        
+        boolean inputCheakEmptyTitle = KeyBord.inputStringCheakEmpty(taskTitle); 
+        boolean inputCheakEmptyMain = KeyBord.inputStringCheakEmpty(taskMain); 
+        
+        if(inputCheakEmptyTitle && inputCheakEmptyMain) {
+        	 System.out.println("\n空白では入力しないでください");
+        }else {
+        	TaskForm taskForm = new TaskForm(taskTitle,taskMain); 
+        	TaskDB.createDBTasks(taskForm);        	
+        }
     }
 
     // Task一覧の表示

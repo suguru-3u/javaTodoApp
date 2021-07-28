@@ -16,34 +16,29 @@ public class UserForm {
 	
 	public UserForm(){
 		
-		System.out.print("\nお名前を入力してください  :");
-        String name = KeyBord.inputKeyBordString();
-
-        System.out.print("emailを入力してください   :");
-        String email = KeyBord.inputKeyBordString();
-
-        System.out.print("Passwordを入力してください:");
-        String password = KeyBord.inputKeyBordString();
+		String userName = KeyBord.inputUserName();
+		String userEmail = KeyBord.inputUserEmail();
+        String userPassword = KeyBord.inputUserPassword();
         
-        boolean inputCount = this.inputCount(name);
+        boolean inputCount = this.inputCount(userEmail);
         
-        boolean emptyCheak = this.emptyCheak(name,email,password);
+        boolean emptyCheak = this.emptyCheak(userName,userEmail,userPassword);
         
-        boolean emailStringCheak = this.emailCheak(email);
+        boolean emailStringCheak = this.emailCheak(userEmail);
         
-        boolean passwordStringCheak = this.passWordCheak(password);
+        boolean passwordStringCheak = this.passWordCheak(userPassword);
         
         if(inputCount && emptyCheak && emailStringCheak && passwordStringCheak) {
-        	String passwordHash = null;
-			try {
-				passwordHash = this.cryptoHash(password);
-			} catch (NoSuchAlgorithmException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-        	this.setName(name);
-        	this.setEmail(email);
-        	this.setPassword(passwordHash);
+        	 String passwordHashString = null;
+ 			try {
+ 				passwordHashString = KeyBord.userPasswordHash(userPassword);
+ 			} catch (Exception e) {
+ 				// TODO 自動生成された catch ブロック
+ 				e.printStackTrace();
+ 			}
+        	this.setName(userName);
+        	this.setEmail(userEmail);
+        	this.setPassword(passwordHashString);
         	this.setCheakCreate(true);
         }else {
         	this.setCheakCreate(false);
@@ -109,7 +104,7 @@ public class UserForm {
 			passwordStringCheak = this.passWordCheak(password);
 			if(passwordStringCheak) {
 				try {
-					password = this.cryptoHash(password);
+					password = this.cryptoHash(password);	
 				} catch (NoSuchAlgorithmException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();

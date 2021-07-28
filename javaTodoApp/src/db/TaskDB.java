@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import form.TaskForm;
 import main.Main;
 import model.Task;
 
 public class TaskDB {
 	
 //	Task登録メソッド
-	public static void createDBTasks(String title,String main) {
+	public static void createDBTasks(TaskForm taskForm) {
 		
 	    String SQL = "insert into tasks(title,main,user_id) VALUES(?,?,?)";
 	        
@@ -22,8 +23,8 @@ public class TaskDB {
             conn.setAutoCommit(false);
             
             try(PreparedStatement ps = conn.prepareStatement(SQL)){
-                ps.setString(1,title);
-                ps.setString(2,main);
+                ps.setString(1,taskForm.getTaskTitle());
+                ps.setString(2,taskForm.getTaskMain());
                 ps.setInt(3,Main.user.getId());
                 
                 ps.executeUpdate();

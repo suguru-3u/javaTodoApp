@@ -1,53 +1,33 @@
 package note;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-
-import db.AccessKey;
 import db.UserDB;
 import form.KeyBord;
 import form.UserForm;
 import main.Main;
-import model.User;
 
 
 public class UserMemo {
 	
-	 // ユーザー情報
-    private List<User>  users = new ArrayList<User>();
-    
-    public int getUserNumbers(){
-        return users.size();
-    }
-	
     // ユーザー情報ログイン情報
     public static void userLogin() {
     	
-    	System.out.println("ユーザー情報登録時のメールアドレスを入力してください");
-        String userEmail = KeyBord.inputKeyBordString();
+    	String userEmail = KeyBord.inputUserEmail();
+        String userPassword = KeyBord.inputUserPassword();
         
-        System.out.println("ユーザー情報登録時のパスワードを入力してください");
-        String userPassword = KeyBord.inputKeyBordString();
+        boolean userEmailCheakEmpty = KeyBord.inputCheackEmpty(userEmail);
+        boolean userPasswordCheakEmpty = KeyBord.inputCheackEmpty(userPassword);
         
-        if(userEmail.isEmpty() && userPassword.isEmpty()) {
-        	 System.out.println("文字を正しく入力してください");
+        if(userEmailCheakEmpty && userPasswordCheakEmpty) {
+        	 System.out.println("文字を正しく入力し	てください");
         }else {
-        	// Hash化
-            MessageDigest digest = null;
+            String passwordHashString = null;
 			try {
-				digest = MessageDigest.getInstance(AccessKey.getHash());
-			} catch (NoSuchAlgorithmException e) {
+				passwordHashString = KeyBord.userPasswordHash(userPassword);
+			} catch (Exception e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-            byte[] passwordHash = digest.digest(userPassword.getBytes());
-       
-            // 文字列に変換
-            String passwordHashString = new String(passwordHash);
-        	UserDB.userLogin(userEmail, passwordHashString);   
-        	
+        	UserDB.userLogin(userEmail, passwordHashString);          	
         }
     }
     
@@ -56,16 +36,13 @@ public class UserMemo {
 		
 		UserForm userform = new UserForm();
 		
-		boolean adminFlg = false;
-		boolean deleteFlg = false;
-		
     	if(userform.getCheakCreate()) {
 
-    		String name = userform.getName();
-    		String email = userform.getEmail();
-    		String password = userform.getPassword();
+    		String userFormName = userform.getName();
+    		String userFormEmail = userform.getEmail();
+    		String userFormPassword = userform.getPassword();
     		
-    		UserDB.createDBUser(name, email, password);
+    		UserDB.createDBUser(userFormName, userFormEmail, userFormPassword);
     	}else {
     		System.out.println("正しく入力してください"); 
     	}
@@ -74,32 +51,25 @@ public class UserMemo {
 	 // User情報を更新するメソッド
     public static void memoContentEdit(){
     	
-    	System.out.print("\nUser情報を表示します");   	
-    	System.out.print(Main.user);
+    	Main.user.toString();
     	
-    	System.out.print("\n情報を変更する場合は「y」を入力してください");   	  	
-    	String taskJugeAnwser = KeyBord.inputKeyBordString();
+    	String inputString = KeyBord.inputCheakY("userEdit");
     	
-        if(taskJugeAnwser.equals("y")){	       	
-    		
-        	System.out.print("\nお名前を入力してください  :");
-            String name = KeyBord.inputKeyBordString();
-
-            System.out.print("emailを入力してください   :");
-            String email = KeyBord.inputKeyBordString();
-
-            System.out.print("Passwordを入力してください:");
-            String password = KeyBord.inputKeyBordString();
+        if(inputString.equals("y")){	       	
+    		     	
+            String userName = KeyBord.inputUserName();
+            String userEmail = KeyBord.inputUserEmail();
+            String userPassword = KeyBord.inputUserPassword();
             
-            UserForm userform = new UserForm(name,email,password);
+            UserForm userform = new UserForm(userName,userEmail,userPassword);
     		
         	if(userform.getCheakCreate()) {
 
-        		String nameForm = userform.getName();
-        		String emailForm = userform.getEmail();
-        		String passwordForm = userform.getPassword();
+        		String userFormName = userform.getName();
+        		String userFormEmail = userform.getEmail();
+        		String userFormPassword = userform.getPassword();
         		
-        		UserDB.editDBUser(nameForm, emailForm, passwordForm);
+        		UserDB.editDBUser(userFormName, userFormEmail, userFormPassword);
         	}else {
         		System.out.println("正しく入力してください"); 
         	}
@@ -107,24 +77,24 @@ public class UserMemo {
         }
     }
     
-//     特定の要素を削除する 
+    //	ユーザー退会処理
     public static void memoContentDelete(){
-    	
-    	 System.out.print("\n退会のご案内です。\n退会されますとデータが消えてしまい復元することができな区なりますが、よろしいですか？");
-    	 System.out.print("\n退会する場合は「y」を入力してください");   	  	
-     	 String taskJugeAnwser = KeyBord.inputKeyBordString();
+    		  	
+     	 String taskJugeAnwser = KeyBord.inputCheakY("userDelete");
      	
          if(taskJugeAnwser.equals("y")){	
-        	System.out.print("\nUser情報を表示します");   	
-         	System.out.print(Main.user);
-         	
-         	System.out.print("\n本当に退会する場合は「y」を入力してください");   	  	
-        	String deleteAnwser = KeyBord.inputKeyBordString();
+        	 	
+         	Main.user.toString();
+         	       		
+        	String deleteAnwser = KeyBord.inputCheakY("userFinalDelete");
         	
             if(deleteAnwser.equals("y")){
+            	
             	int userID = Main.user.getId();
             	UserDB.deleteDBUser(userID);
+            	
             	System.exit(0);
+            	
             }else{
             	System.out.print("\n退会処理を中止します。");  
             }
@@ -132,25 +102,4 @@ public class UserMemo {
         	 System.out.print("\n退会処理を中止します。");   	  	
          }
     } 
-    
-//    public void usersShow(){
-//    	
-//    	this.users.clear();
-//    	
-//    	UserDB.getDBUser(this.users);
-//    	
-//    	if(users.isEmpty()){
-//    		System.out.println("\n現在登録しているユーザーはいません\n");
-//    	}else{
-//    		System.out.println("\n■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-//    		System.out.println("user情報");
-//    		System.out.println("user数 ： " + this.getUserNumbers() + "人");
-//    		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-//    		System.out.println("");
-//    		this.users.stream()
-//    		.map(i -> "■ " + (users.index(i)  + 1 ) + "\n名前：　" + i.getName() + "\nメールアドレス：  " + i.getEmail())
-//    		.forEach(i -> System.out.println(i));
-//    		System.out.println("");
-//    	}
-//    }
 }
