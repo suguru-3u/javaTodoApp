@@ -19,6 +19,7 @@ public class Main{
     boolean app = true;
     
 	System.out.println("ようこそJavaTodoAppへ");
+	System.out.println("ようこそJavaTodoAppへ");
 	
     //ログイン、会員登録
 	while(appp){
