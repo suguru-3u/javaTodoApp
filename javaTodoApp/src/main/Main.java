@@ -18,7 +18,8 @@ public class Main{
 	  
     boolean app = true;
     
-//	System.out.println("ようこそJavaTodoAppへ");
+
+    
 	System.out.println("ようこそJavaTodoAppへ");
 	
     //ログイン、会員登録
@@ -37,6 +38,10 @@ public class Main{
 	    		break;
 		      
 		    case 3 :
+		    	System.exit(0);
+		    	break;
+		    	
+		    case 4 :
 		    	System.exit(0);
 		    	break;
 		      
