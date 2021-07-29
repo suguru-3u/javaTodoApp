@@ -18,7 +18,7 @@ public class TaskDB {
 		
 	    String SQL = "insert into tasks(title,main,user_id) VALUES(?,?,?)";
 	        
-        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             
@@ -45,7 +45,7 @@ public class TaskDB {
 		
 	    String SQL = "delete from tasks where id = (?)";
 	        
-        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             
@@ -70,7 +70,7 @@ public class TaskDB {
 		
 	    String SQL = "update tasks set title = (?),main = (?) where id = (?)";
 	        
-        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             
@@ -103,7 +103,7 @@ public class TaskDB {
     	
 	    String SQL = "SELECT * FROM tasks INNER JOIN users ON tasks.user_id = users.id where tasks.delete_flg = 0 and tasks.user_id = (?)";
 	    
-	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             
@@ -143,7 +143,7 @@ public class TaskDB {
     	
 	    String SQL = "SELECT * FROM tasks";
 	    
-	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             

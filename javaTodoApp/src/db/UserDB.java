@@ -21,7 +21,7 @@ public class UserDB {
 	    
 	    String SQL = "SELECT * FROM users WHERE email = (?) and password = (?)";
 	        
-        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             
@@ -54,7 +54,7 @@ public class UserDB {
 		
 		 String SQL = "SELECT * FROM users WHERE email = (?) and password = (?) and delete_flg = 0";
 	        
-	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
 	            conn.setAutoCommit(false);
 	            
@@ -94,7 +94,7 @@ public class UserDB {
 		
 	    String SQL = "update users set delete_flg = 1  where id = (?)";
 	        
-        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             
@@ -120,7 +120,7 @@ public class UserDB {
 		
 	    String SQL = "update users set name = (?), email = (?), password = (?) where id = (?)";
 	        
-        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             
@@ -152,7 +152,7 @@ public class UserDB {
 		
 		 String SQL = "SELECT * FROM users WHERE id = (?) and delete_flg = 0";
 	        
-	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+	        try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
 	            conn.setAutoCommit(false);
 	            
@@ -195,7 +195,7 @@ public class UserDB {
     	
 	    String SQL = "SELECT * FROM users";
 	    
-	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL(), AccessKey.getUSER(), AccessKey.getPASS())){
+	    try(Connection conn = DriverManager.getConnection(AccessKey.getURL, AccessKey.getUSER, AccessKey.getPASS)){
 
             conn.setAutoCommit(false);
             

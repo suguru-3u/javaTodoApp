@@ -117,7 +117,7 @@ public class KeyBord{
 //    	userPasswordを暗号化
     	MessageDigest digest = null;
     	try {
-    		digest = MessageDigest.getInstance(AccessKey.getHash());
+    		digest = MessageDigest.getInstance(AccessKey.getHash);
     	} catch (NoSuchAlgorithmException e) {
     		e.printStackTrace();
     	}
