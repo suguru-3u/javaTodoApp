@@ -1,5 +1,10 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
 import db.UserDB;
 import form.KeyBord;
 import model.User;
@@ -14,17 +19,50 @@ public class Main{
 	
 	public static User user = null;
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 	  
     boolean app = true;
     
 
+//        Runtime runtime = Runtime.getRuntime();
+//        try {
+//			runtime.exec("mysql.server start");
+//			System.out.println("DBを起動しました");
+//		} catch (IOException e) {		
+//			e.printStackTrace();
+//		}
+    
+    // 実行する外部プログラムを指定してProcessBuilderインスタンスを生成する
+    // Macの場合はこちら  /usr/local/mysql/bin/mysql
+    
+    String mysqlenv = System.getenv("mysql");
+    System.out.println(mysqlenv);
+    ProcessBuilder p = new ProcessBuilder("/Users/oohirasuguru/Desktop/java jar/mysql.sh");
+//    ProcessBuilder p = new ProcessBuilder( "sh", "musql.server start'");
+//    ProcessBuilder p = new ProcessBuilder("mysql.server start");
+    
+    p.redirectErrorStream(true);
+
+    // プロセスを開始する
+    Process process = p.start();
+
+    // 結果を受け取る
+    try (BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream(), Charset.defaultCharset()))) {
+        String line;
+        while ((line = r.readLine()) != null) {
+            System.out.println(line);
+        }
+    }
+    int result = process.exitValue();
+    System.out.printf("result=%d%n", result);
+
+    
     
 	System.out.println("ようこそJavaTodoAppへ");
 	
     //ログイン、会員登録
 	while(appp){
-		System.out.println("ログインは「1」、会員登録は「2」、アプリを終了する場合は「3」を入力してください");
+//		System.out.println("ログインは「1」、会員登録は「2」、アプリを終了する場合は「3」を入力してください");
 		int inputSelectNumber = KeyBord.inputFirstSelectNumber();
 		
 		switch(inputSelectNumber){
@@ -38,10 +76,12 @@ public class Main{
 	    		break;
 		      
 		    case 3 :
-		    	System.exit(0);
-		    	break;
-		    	
-		    case 4 :
+		    	try {
+ 			        Runtime runtime2 = Runtime.getRuntime();
+ 			        runtime2.exec("mysql.server stop");
+ 			        System.out.println("DBを停止しました");
+ 			    } catch (IOException ex) {
+ 			    }
 		    	System.exit(0);
 		    	break;
 		      
@@ -102,12 +142,14 @@ public class Main{
     			}    	
     			break;
     			
-    			// Task内容変更処理
-    		case 3 :
-    			
-    			break;
-    			
     		case 5 :
+    			 try {
+    			        Runtime runtime3 = Runtime.getRuntime();
+    			        runtime3.exec("mysql.server stop");
+    			        System.out.println("DBを停止しました");
+    			    } catch (IOException ex) {
+    			    	System.out.println("DBの起動に失敗しました。アプリを再起動してください");
+    			    }
     			System.exit(0);
     			break;
     			
@@ -163,6 +205,13 @@ public class Main{
     			break;
     			
     		case 5 :
+    			try {
+ 			        Runtime runtime4 = Runtime.getRuntime();
+ 			        runtime4.exec("mysql.server stop");
+ 			        System.out.println("DBを停止しました");
+ 			    } catch (IOException ex) {
+ 			    	System.out.println("DBの起動に失敗しました。アプリを再起動してください");
+ 			    }
     			System.exit(0);
     			break;
     			

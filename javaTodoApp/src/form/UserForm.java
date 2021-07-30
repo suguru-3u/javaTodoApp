@@ -200,7 +200,7 @@ public class UserForm {
 	public String cryptoHash(String password) throws NoSuchAlgorithmException {
 		
 		// Hash化
-        MessageDigest digest = MessageDigest.getInstance(AccessKey.getHash());
+        MessageDigest digest = MessageDigest.getInstance(AccessKey.getHash);
         byte[] passwordHash = digest.digest(password.getBytes());
    
         // 文字列に変換

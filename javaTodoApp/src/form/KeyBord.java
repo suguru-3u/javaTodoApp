@@ -49,9 +49,9 @@ public class KeyBord{
 	
 	public static boolean inputCheackEmpty(String inputString) {
 		if(inputString.isEmpty()) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	public static String inputTaskTitle() {
