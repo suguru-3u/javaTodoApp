@@ -35,12 +35,13 @@ public class Main{
     // 実行する外部プログラムを指定してProcessBuilderインスタンスを生成する
     // Macの場合はこちら  /usr/local/mysql/bin/mysql
     
-    String mysqlenv = System.getenv("mysql");
-    System.out.println(mysqlenv);
-    ProcessBuilder p = new ProcessBuilder("/Users/oohirasuguru/Desktop/java jar/mysql.sh");
-//    ProcessBuilder p = new ProcessBuilder( "sh", "musql.server start'");
+//    String mysqlenv = System.getenv("mysql");
+//    System.out.println(mysqlenv);
+    ProcessBuilder p = new ProcessBuilder("/Users/oohirasuguru/Desktop/java jar/mysql.sh","source mysql.sh");
+//    ProcessBuilder p 	= new ProcessBuilder( "sh", "musql.server start'");
 //    ProcessBuilder p = new ProcessBuilder("mysql.server start");
-    
+//    Map<String, String> env = p.environment();
+//	env.put("AAA", "/usr/local/bin/mysql");
     p.redirectErrorStream(true);
 
     // プロセスを開始する
