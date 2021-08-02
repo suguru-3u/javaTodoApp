@@ -59,8 +59,8 @@ public class Main{
 
     
     
-	System.out.println("ようこそJavaTodoAppへ");
-	System.out.println("ようこそJavaTodoAppへ");
+//	System.out.println("ようこそJavaTodoAppへ");
+//	System.out.println("ようこそJavaTodoAppへ");
 	System.out.println("ようこそJavaTodoAppへ");
 	
     //ログイン、会員登録
@@ -75,6 +75,10 @@ public class Main{
 		    	break;
 		
 		    case 2 :
+	    		UserMemo.userCreate();
+	    		break;
+	    	
+		    case 4:
 	    		UserMemo.userCreate();
 	    		break;
 		      
