@@ -77,11 +77,7 @@ public class Main{
 		    case 2 :
 	    		UserMemo.userCreate();
 	    		break;
-	    	
-		    case 4:
-	    		UserMemo.userCreate();
-	    		break;
-		      
+	    		
 		    case 3 :
 		    	try {
  			        Runtime runtime2 = Runtime.getRuntime();
