@@ -161,6 +161,22 @@ public class Main{
     			break;
     		}
     		
+    	case 5 :
+			 try {
+			        Runtime runtime3 = Runtime.getRuntime();
+			        runtime3.exec("mysql.server stop");
+			        System.out.println("DBを停止しました");
+			    } catch (IOException ex) {
+			    	System.out.println("DBの起動に失敗しました。アプリを再起動してください");
+			    }
+			System.exit(0);
+			break;
+			
+		default:
+			System.out.print("正しく入力してください");
+			break;
+		}
+    		
     	}else {
     		AdminMemo adminmemo = new AdminMemo(); 		
     		
